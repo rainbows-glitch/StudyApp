@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">messingAround</string>
+
+    <string name="content_description">Decoration</string>
+
+    <string name="test">Hello</string>
+    <string name="Emptyplaceholder"> </string>
+</resources>

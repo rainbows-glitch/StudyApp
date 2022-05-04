@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraint_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_bg"
+    android:contentDescription="@string/content_description"
+    app:layout_constraintGuide_percent="0.65">
+
+    <ImageView
+        android:id="@+id/alphaWave"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:alpha=".6"
+        android:contentDescription="@string/content_description"
+        app:layout_constraintBottom_toTopOf="@+id/alphaGuide"
+        app:layout_constraintDimensionRatio="h,14.4:7"
+        app:layout_constraintEnd_toEndOf="@+id/waveRightGuide"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/waveLeftGuide"
+        app:srcCompat="@drawable/ic_wavebg" />
+
+    <ImageView
+        android:id="@+id/foreWave"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/content_description"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="h,14.4:7"
+        app:layout_constraintEnd_toEndOf="@+id/waveRightGuide"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/bg_forewave" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/waveRightGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="72dp"
+        app:layout_constraintGuide_percent="1.04" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/waveLeftGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="-123dp"
+        app:layout_constraintGuide_percent="-0.03" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/alphaGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="0dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/blobGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="0dp"
+        app:layout_constraintGuide_percent=".25" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/blueBlobGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="133dp"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <ImageView
+        android:id="@+id/purpleBlob"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/content_description"
+        app:layout_constraintDimensionRatio="h,1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/blobGuide"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_purple_blob" />
+
+    <ImageView
+        android:id="@+id/blueBlob"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:alpha="0.68"
+        android:contentDescription="@string/content_description"
+        app:layout_constraintBottom_toBottomOf="@+id/purpleBlob"
+        app:layout_constraintDimensionRatio="h,1:1"
+        app:layout_constraintEnd_toEndOf="@id/purpleBlob"
+        app:layout_constraintStart_toStartOf="@+id/blueBlobGuide"
+        app:srcCompat="@drawable/ic_trianglecut" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/circleGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp"
+        app:layout_constraintGuide_percent="0.01" />
+
+    <View
+        android:id="@+id/bgCircle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginBottom="-10dp"
+        android:alpha=".6"
+        android:background="@drawable/bg_circle"
+        app:layout_constraintBottom_toTopOf="@+id/alphaWave"
+        app:layout_constraintDimensionRatio="h,1:1"
+        app:layout_constraintEnd_toEndOf="@+id/circleGuide"
+        app:layout_constraintStart_toStartOf="@id/waveLeftGuide" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
