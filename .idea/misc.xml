@@ -14,8 +14,9 @@
         <entry key="..\:/Creations/AndroidStudioProjects/messingAround/app/src/main/res/drawable/ic_trianglecut.xml" value="0.299" />
         <entry key="..\:/Creations/AndroidStudioProjects/messingAround/app/src/main/res/drawable/ic_wavebg.xml" value="0.299" />
         <entry key="..\:/Creations/AndroidStudioProjects/messingAround/app/src/main/res/drawable/ic_wavebg2.xml" value="0.299" />
-        <entry key="..\:/Creations/AndroidStudioProjects/messingAround/app/src/main/res/layout/activity_main.xml" value="0.17" />
-        <entry key="..\:/Creations/AndroidStudioProjects/messingAround/app/src/main/res/layout/fragment_home.xml" value="0.3596014492753623" />
+        <entry key="..\:/Creations/AndroidStudioProjects/messingAround/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Creations/AndroidStudioProjects/messingAround/app/src/main/res/layout/fragment_chat.xml" value="0.2984181274048739" />
+        <entry key="..\:/Creations/AndroidStudioProjects/messingAround/app/src/main/res/layout/fragment_home.xml" value="0.2" />
       </map>
     </option>
   </component>
