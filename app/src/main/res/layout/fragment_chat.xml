@@ -6,11 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".Chat">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="19dp"
-        android:text="ChatFragment"
+    <View
+        android:id="@+id/testing2"
+        android:layout_width="294dp"
+        android:layout_height="366dp"
+        android:background="#0138FF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

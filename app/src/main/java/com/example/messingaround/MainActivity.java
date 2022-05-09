@@ -8,9 +8,9 @@ import android.view.View;
 import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
-    public ConstraintLayout constraintLayout;
-    public ImageView foreWave, alphaWave;
-    public Guideline alphaGuide;
+    protected ConstraintLayout constraintLayout;
+    protected ImageView foreWave, alphaWave;
+    protected Guideline alphaGuide;
 
     @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -18,9 +18,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         constraintLayout = findViewById(R.id.constraint_layout);
-        foreWave = (ImageView) findViewById(R.id.foreWave);
-        alphaWave = (ImageView) findViewById(R.id.alphaWave);
-        alphaGuide = (Guideline) findViewById(R.id.alphaGuide);
+        foreWave = findViewById(R.id.foreWave);
+        alphaWave = findViewById(R.id.alphaWave);
+        alphaGuide = findViewById(R.id.alphaGuide);
 
         foreWave.post(() -> {
             alphaGuide.setGuidelineEnd(foreWave.getHeight()/7);
