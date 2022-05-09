@@ -44,13 +44,6 @@ public class home extends Fragment {
             }
         });
 
-//        tester.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Navigation.findNavController(view).navigate(R.id.home2chat);
-//            }
-//        });
-
         return view;
     }
 
