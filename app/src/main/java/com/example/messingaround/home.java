@@ -32,7 +32,7 @@ public class home extends Fragment {
         navSlider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.home2chat);
+                Navigation.findNavController(view).navigate(R.id.chatAction_GLOBAL);
             }
         });
 

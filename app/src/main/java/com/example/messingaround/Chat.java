@@ -21,7 +21,7 @@ public class Chat extends Fragment {
         tester.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.chat2home);
+                Navigation.findNavController(view).navigate(R.id.homeAction_GLOBAL);
             }
         });
 
