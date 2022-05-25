@@ -1,4 +1,4 @@
-package com.example.messingaround;
+package com.example.studyApp;
 
 import android.content.Context;
 

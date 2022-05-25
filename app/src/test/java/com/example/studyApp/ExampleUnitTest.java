@@ -1,4 +1,4 @@
-package com.example.messingaround;
+package com.example.studyApp;
 
 import org.junit.Test;
 
