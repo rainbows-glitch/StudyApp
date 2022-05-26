@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="white_bg">#fdf6ff</color>
-    <color name="black_bg">#30003c</color>
+    <color name="lightBG">#fdf6ff</color>
+    <color name="darkBG">#30003c</color>
 
     <color name="purple">#FFA532E7</color>
 
@@ -14,5 +14,6 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
 
+<!--    actionbar transparency-->
     <color name="transparent">#00FFFFFF</color>
 </resources>
