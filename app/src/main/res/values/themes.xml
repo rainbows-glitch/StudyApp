@@ -13,6 +13,8 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/lightBG</item>
+        <!-- Customize your theme here. -->
+        <item name="android:colorBackground">@color/lightBG</item>
     </style>
 
     <style name="ActionBar" parent="@style/Widget.AppCompat.ActionBar">
