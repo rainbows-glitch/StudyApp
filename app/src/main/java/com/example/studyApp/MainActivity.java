@@ -7,18 +7,16 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
-    protected ConstraintLayout constraintLayout;
-    protected ImageView foreWave, alphaWave;
+    protected ImageView foreWave;
     protected Guideline alphaGuide;
 
     @Override
         protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setSupportActionBar(findViewById(R.id.toolbar));
 
-        constraintLayout = findViewById(R.id.constraint_layout);
         foreWave = findViewById(R.id.foreWave);
-        alphaWave = findViewById(R.id.alphaWave);
         alphaGuide = findViewById(R.id.alphaGuide);
 
         foreWave.post(() -> {
