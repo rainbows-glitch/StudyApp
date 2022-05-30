@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.Guideline;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,9 +19,9 @@ public class MainActivity extends AppCompatActivity {
 
         foreWave = findViewById(R.id.foreWave);
         alphaGuide = findViewById(R.id.alphaGuide);
-
         foreWave.post(() -> {
             alphaGuide.setGuidelineEnd(foreWave.getHeight()/7);
+            Log.d("alphawave","guide adjusted");
         });
     }
 }

@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Creations/AndroidStudioProjects/StudyApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.299" />
         <entry key="..\:/Creations/AndroidStudioProjects/StudyApp/app/src/main/res/drawable/ic_wavebg.xml" value="0.299" />
         <entry key="..\:/Creations/AndroidStudioProjects/StudyApp/app/src/main/res/font/asap_action_bar.xml" value="0.3927083333333333" />
         <entry key="..\:/Creations/AndroidStudioProjects/StudyApp/app/src/main/res/layout-large/activity_main.xml" value="0.27117486338797814" />
@@ -10,6 +11,7 @@
         <entry key="..\:/Creations/AndroidStudioProjects/StudyApp/app/src/main/res/layout-small/activity_main.xml" value="0.8305439330543933" />
         <entry key="..\:/Creations/AndroidStudioProjects/StudyApp/app/src/main/res/layout-xlarge/activity_main.xml" value="0.27117486338797814" />
         <entry key="..\:/Creations/AndroidStudioProjects/StudyApp/app/src/main/res/layout/activity_main.xml" value="0.3596014492753623" />
+        <entry key="..\:/Creations/AndroidStudioProjects/StudyApp/app/src/main/res/layout/fragment_home.xml" value="0.3596014492753623" />
       </map>
     </option>
   </component>
