@@ -16,7 +16,20 @@ public class study extends Fragment {
         View view = inflater.inflate(R.layout.fragment_study, container, false);
 
         TextView text = view.findViewById(R.id.textView3);
-        text.setOnClickListener(view1 -> Navigation.findNavController(view1).navigate(R.id.home_globalAction));
+        View tint = view.findViewById(R.id.tint2);
+        View slider = view.findViewById(R.id.slider2);
+
+        text.setOnClickListener(view13 -> {
+            tint.setVisibility(View.VISIBLE);
+            slider.setVisibility(View.VISIBLE);
+        });
+
+        tint.setOnClickListener(view12 -> {
+            tint.setVisibility(View.GONE);
+            slider.setVisibility(View.GONE);
+        });
+
+        slider.setOnClickListener(view1 -> Navigation.findNavController(view1).navigate(R.id.home_globalAction));
 
         return view;
     }
