@@ -1,46 +1,54 @@
 package com.example.studyApp;
 
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.Guideline;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Menu;
 import android.widget.ImageView;
 
+import com.google.android.material.navigation.NavigationView;
+
 public class MainActivity extends AppCompatActivity {
+//    declare variables
     private ImageView foreWave;
     private Guideline alphaGuide;
     private Toolbar toolBar;
     private DrawerLayout mDrawerLayout;
+    private NavHostFragment navHost;
+    private NavController mNavController;
+    private AppBarConfiguration mAppBarConfiguration;
 
     @Override
         protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+//        initialize variables
         toolBar = findViewById(R.id.toolbar);
         mDrawerLayout = findViewById(R.id.drawerLayout);
-        foreWave = findViewById(R.id.foreWave);
-        alphaGuide = findViewById(R.id.alphaGuide);
+        navHost = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.navhost);
+        mNavController = navHost.getNavController();
 
         setSupportActionBar(toolBar);
-        ActionBarDrawerToggle navToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolBar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        mDrawerLayout.addDrawerListener(navToggle);
-        navToggle.syncState();
 
+        mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_home, R.id.nav_study, R.id.nav_chat).setOpenableLayout(mDrawerLayout).build();
+        NavigationUI.setupWithNavController(toolBar, mNavController, mDrawerLayout);
+        NavigationUI.setupWithNavController((NavigationView) findViewById(R.id.drawer), mNavController);
+
+        foreWave = findViewById(R.id.foreWave);
+        alphaGuide = findViewById(R.id.alphaGuide);
         foreWave.post(() -> alphaGuide.setGuidelineEnd(foreWave.getHeight()/7));
     }
 
     @Override
-    public void onBackPressed() {
-        if(mDrawerLayout.isDrawerOpen(GravityCompat.START)){
-            mDrawerLayout.closeDrawer(GravityCompat.START);
-        }else{
-        super.onBackPressed();
+    public boolean onSupportNavigateUp() {
+        return NavigationUI.navigateUp(mNavController, mAppBarConfiguration)
+                || super.onSupportNavigateUp();
     }
-}}
+}
