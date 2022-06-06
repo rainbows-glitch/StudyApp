@@ -6,6 +6,8 @@
     <string name="test">Hello</string>
     <string name="Emptyplaceholder"> </string>
 
-    <string name="navigation_drawer_open">Open Navigation Drawer</string>
-    <string name="navigation_drawer_close">Close Navigation Drawer</string>
+    <string name="closeLabel">Close Menu</string>
+    <string name="homeLabel">Home</string>
+    <string name="studyLabel">Study</string>
+    <string name="chatLabel">Chat</string>
 </resources>
