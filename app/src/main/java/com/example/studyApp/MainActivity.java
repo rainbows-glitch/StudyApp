@@ -44,10 +44,14 @@ public class MainActivity extends AppCompatActivity {
         mNavController = navHost.getNavController();
         NavigationView drawer = findViewById(R.id.drawer);
 
+//        tells system to use toolbar as app bar
         setSupportActionBar(toolBar);
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.close_nav, R.id.nav_home, R.id.nav_study, R.id.nav_chat).setOpenableLayout(drawerLayout).build();
+
+//        sets up appBar for use with navController (added the menu icon too)
         NavigationUI.setupActionBarWithNavController(this, mNavController, mAppBarConfiguration);
+//        syncs the navController with the navigationView (the navigation drawer)
         NavigationUI.setupWithNavController(drawer, mNavController);
 
         drawer.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
