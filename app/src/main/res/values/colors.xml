@@ -13,4 +13,11 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+
+<!--    <color name="mtrl_navigation_item_background_color">#99CA22FF</color>-->
+
+<!--    colours for navSlider-->
+    <color name="darkNavSliderBG">#FF19101b</color>
+    <color name="lightNavSliderBG">#FFFCFCFC</color>
+    <color name="selectedNavItemBG">#99CA22FF</color>
 </resources>
