@@ -47,13 +47,14 @@ public class MainActivity extends AppCompatActivity {
 //        tells system to use toolbar as app bar
         setSupportActionBar(toolBar);
 
+//        defines all top-level pages (added the menu icon too)
         mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.close_nav, R.id.nav_home, R.id.nav_study, R.id.nav_chat).setOpenableLayout(drawerLayout).build();
-
-//        sets up appBar for use with navController (added the menu icon too)
+//        sets up appBar for use with navController using appBar config defined above
         NavigationUI.setupActionBarWithNavController(this, mNavController, mAppBarConfiguration);
-//        syncs the navController with the navigationView (the navigation drawer)
+//        syncs the navigationView with the navController (the navigation drawer)
         NavigationUI.setupWithNavController(drawer, mNavController);
 
+//        called when item from navSlider selected
         drawer.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+//        centre header
         mConstraintSet = new ConstraintSet();
         mConstraintSet.clone(toolBarLayout);
         toolBar.post(()-> header.post(()->{
@@ -73,11 +75,13 @@ public class MainActivity extends AppCompatActivity {
             mConstraintSet.applyTo(toolBarLayout);
         }));
 
+//        adjust alphaWave
         foreWave = findViewById(R.id.foreWave);
         alphaGuide = findViewById(R.id.alphaGuide);
         foreWave.post(() -> alphaGuide.setGuidelineEnd(foreWave.getHeight()/7));
     }
 
+//    navigate from deep-level to top-level page
     @Override
     public boolean onSupportNavigateUp() {
         return NavigationUI.navigateUp(mNavController, mAppBarConfiguration) || super.onSupportNavigateUp();

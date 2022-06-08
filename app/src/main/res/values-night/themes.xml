@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.StudyApp" parent="Theme.MaterialComponents.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#FF00FF00</item>
+        <item name="colorPrimary">@color/selectedNavItemBG</item>
         <item name="colorPrimaryVariant">@color/darkNavSliderBG</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->

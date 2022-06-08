@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.StudyApp" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimary">@color/selectedNavItemBG</item>
         <item name="colorPrimaryVariant">@color/lightNavSliderBG</item>
         <item name="colorOnPrimary">@color/writingOnLightBG</item>
         <!-- Secondary brand color. -->
