@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.StudyApp" parent="Theme.MaterialComponents.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/selectedNavItemBG</item>
+        <item name="colorPrimary">@color/darkBG</item>
         <item name="colorPrimaryVariant">@color/darkNavSliderBG</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -14,5 +14,7 @@
         <!-- Customize your theme here. -->
         <item name="android:colorBackground">@color/darkBG</item>
         <item name="colorOnBackground">@color/white</item>
+
+        <item name="colorTertiary">@color/glassMorphismDarkFill</item>
     </style>
 </resources>
