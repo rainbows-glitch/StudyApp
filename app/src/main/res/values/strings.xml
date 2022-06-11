@@ -4,12 +4,17 @@
     <string name="content_description">Decoration</string>
 
     <string name="test">Hello</string>
-    <string name="Emptyplaceholder"> </string>
+    <string name="EmptyPlaceholder"> </string>
 
     <string name="closeLabel">Close Menu</string>
     <string name="homeLabel">Home</string>
     <string name="studyLabel">Study</string>
     <string name="chatLabel">Chat</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="signIn">Sign In</string>
+
+    <string name="emailHeader">Email</string>
+
+<!--    delete-->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
