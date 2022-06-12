@@ -7,7 +7,7 @@
         <item name="colorOnPrimary">@color/writingOnLightBG</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/purple</item>
-        <item name="colorSecondaryVariant">@color/purple</item>
+        <item name="colorSecondaryVariant">@color/purpleOnLight</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:windowLightStatusBar">true</item>

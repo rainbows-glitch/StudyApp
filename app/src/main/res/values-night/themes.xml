@@ -7,7 +7,7 @@
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/white</item>
-        <item name="colorSecondaryVariant">@color/purple</item>
+        <item name="colorSecondaryVariant">@color/purpleOnDark</item>
         <item name="colorOnSecondary">@color/purple</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/darkBG</item>
@@ -16,5 +16,7 @@
         <item name="colorOnBackground">@color/white</item>
 
         <item name="colorTertiary">@color/glassMorphismDarkFill</item>
+
+<!--        <item name="googleOAuthBG">#FF4285F4</item>-->
     </style>
 </resources>

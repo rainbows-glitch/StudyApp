@@ -11,7 +11,10 @@
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
-    <color name="purple">#874ee6</color>
+
+    <color name="purple">#FF874EE6</color>
+    <color name="purpleOnDark">#FFB487F1</color>
+    <color name="purpleOnLight">#FF864DE5</color>
 
 <!--    colours for navSlider-->
     <color name="darkNavSliderBG">#FF19101b</color>
