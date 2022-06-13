@@ -25,4 +25,6 @@
     <color name="glassMorphismDarkFill">#FF3A3A3A</color>
     <color name="glassMorphismLightFill">#FFFCFCFC</color>
 
+    <color name="gOAuthDark">#FF4285F4</color>
+
 </resources>

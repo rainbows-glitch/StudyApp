@@ -17,5 +17,6 @@
         <item name="colorOnBackground">@color/writingOnLightBG</item>
 
         <item name="colorTertiary">@color/glassMorphismLightFill</item>
+        <item name="colorTertiaryContainer">@color/white</item>
     </style>
 </resources>

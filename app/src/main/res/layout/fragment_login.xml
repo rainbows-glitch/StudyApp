@@ -102,7 +102,7 @@
         app:layout_constraintTop_toBottomOf="@+id/passwordLabel" />
 
     <android.widget.Button
-        android:id="@+id/button"
+        android:id="@+id/continueButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
@@ -130,9 +130,9 @@
         android:textAlignment="center"
         android:textColor="?attr/colorSecondaryVariant"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/button"
-        app:layout_constraintStart_toStartOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintEnd_toEndOf="@+id/continueButton"
+        app:layout_constraintStart_toStartOf="@+id/continueButton"
+        app:layout_constraintTop_toBottomOf="@+id/continueButton" />
 
     <TextView
         android:id="@+id/orLinebreak"
@@ -173,7 +173,8 @@
         android:id="@+id/OAuthBG"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#4285F4"
+        android:background="@drawable/google_oauth_bg"
+        android:elevation="30dp"
         app:layout_constraintBottom_toBottomOf="@+id/oAuthLabel"
         app:layout_constraintEnd_toEndOf="@+id/oAuthLabel"
         app:layout_constraintHorizontal_bias="0.0"
@@ -187,6 +188,7 @@
         android:layout_height="0dp"
         android:adjustViewBounds="true"
         android:contentDescription="@string/signInWithGoogle"
+        android:elevation="35dp"
         android:src="@drawable/ic_btn_google_light"
         app:layout_constraintBottom_toBottomOf="@+id/oAuthLabel"
         app:layout_constraintEnd_toStartOf="@+id/oAuthLabel"
@@ -199,13 +201,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:elevation="35dp"
         android:fontFamily="@font/roboto_medium"
         android:paddingStart="16dp"
         android:paddingTop="12dp"
         android:paddingEnd="8dp"
         android:paddingBottom="12dp"
         android:text="@string/signInWithGoogle"
-        android:textColor="#FFFFFFFF"
+        android:textColor="?attr/colorOnBackground"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/glassRight"
         app:layout_constraintStart_toStartOf="@+id/glassLeft"

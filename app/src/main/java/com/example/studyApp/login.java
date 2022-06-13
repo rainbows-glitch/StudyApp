@@ -4,6 +4,8 @@ import android.os.Bundle;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
+
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class login extends Fragment {
+//    declare
     private View glass;
     private ConstraintLayout loginLayout;
     private TextView emailLabel, passwordLabel, oAuthLabel, register1, register2;
@@ -20,8 +23,7 @@ public class login extends Fragment {
     private ImageView googleIcon;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
@@ -36,6 +38,8 @@ public class login extends Fragment {
         googleIcon = view.findViewById(R.id.googleIcon);
         register1 = view.findViewById(R.id.registerP1);
         register2 = view.findViewById(R.id.registerP2);
+
+       ((MainActivity)getActivity()).hideNavigation();
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -58,6 +62,14 @@ public class login extends Fragment {
         emailLabel.setOnClickListener(view1 -> emailInput.requestFocus());
         passwordLabel.setOnClickListener(view1 -> passwordInput.requestFocus());
 
+//        centre register button/textView
+        glass.post(()-> register1.post(()-> register2.post(()->{
+            int horizontalSpace = glass.getWidth() - (register1.getWidth() + register2.getWidth());
+            mConstraintSet.setMargin(register1.getId(), ConstraintSet.END, (horizontalSpace/2) + register2.getWidth());
+            mConstraintSet.setMargin(register1.getId(), ConstraintSet.START, horizontalSpace/2);
+            mConstraintSet.applyTo(loginLayout);
+        })));
+
 //        centre Google OAuth horizontally
         glass.post(()-> oAuthLabel.post(()-> googleIcon.post(()->{
            int horizontalSpace = glass.getWidth() - (oAuthLabel.getWidth() + googleIcon.getWidth());
@@ -66,13 +78,9 @@ public class login extends Fragment {
             mConstraintSet.applyTo(loginLayout);
         })));
 
-//        centre register button/textView
-        glass.post(()-> register1.post(()-> register2.post(()->{
-            int horizontalSpace = glass.getWidth() - (register1.getWidth() + register2.getWidth());
-            mConstraintSet.setMargin(register1.getId(), ConstraintSet.END, (horizontalSpace/2) + register2.getWidth());
-            mConstraintSet.setMargin(register1.getId(), ConstraintSet.START, horizontalSpace/2);
-            mConstraintSet.applyTo(loginLayout);
-        })));
+//        switch to signUp fragment
+        register1.setOnClickListener(view1 -> NavHostFragment.findNavController(this).navigate(R.id.login2SignUp));
+        register2.setOnClickListener(view1 -> NavHostFragment.findNavController(this).navigate(R.id.login2SignUp));
 
         return view;
     }

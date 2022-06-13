@@ -16,7 +16,6 @@
         <item name="colorOnBackground">@color/white</item>
 
         <item name="colorTertiary">@color/glassMorphismDarkFill</item>
-
-<!--        <item name="googleOAuthBG">#FF4285F4</item>-->
+        <item name="colorTertiaryContainer">@color/gOAuthDark</item>
     </style>
 </resources>
