@@ -14,7 +14,9 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 //    declare variables
     private ConstraintLayout toolBarLayout;
     private ConstraintSet mConstraintSet;
-    private TextView header;
+    private TextView header, hiddenHeader;
     private Toolbar toolBar;
     private NavController mNavController;
     private AppBarConfiguration mAppBarConfiguration;
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         toolBarLayout = (ConstraintLayout) findViewById(R.id.toolBarConstraint);
         toolBar = findViewById(R.id.toolbar);
         header = findViewById(R.id.header);
+        hiddenHeader = findViewById(R.id.hiddenTitle);
         DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
         NavHostFragment navHost = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.navhost);
         assert navHost != null;
@@ -60,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         drawer.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() != R.id.close_nav){
+                if (item.getItemId() != R.id.close_nav) {
                     NavigationUI.onNavDestinationSelected(item, mNavController);
                 }
                 drawerLayout.closeDrawers();
@@ -71,21 +74,37 @@ public class MainActivity extends AppCompatActivity {
 //        centre header
         mConstraintSet = new ConstraintSet();
         mConstraintSet.clone(toolBarLayout);
-        toolBar.post(()-> header.post(()->{
+        toolBar.post(() -> header.post(() -> {
             int whiteSpace = toolBar.getWidth() - header.getWidth();
-            mConstraintSet.setMargin(header.getId(), ConstraintSet.END, whiteSpace/2);
+            mConstraintSet.setMargin(header.getId(), ConstraintSet.END, whiteSpace / 2);
             mConstraintSet.applyTo(toolBarLayout);
         }));
 
 //        adjust alphaWave
         foreWave = findViewById(R.id.foreWave);
         alphaGuide = findViewById(R.id.alphaGuide);
-        foreWave.post(() -> alphaGuide.setGuidelineEnd(foreWave.getHeight()/7));
+        foreWave.post(() -> alphaGuide.setGuidelineEnd(foreWave.getHeight() / 7));
+
     }
 
 //    navigate from deep-level to top-level page
     @Override
     public boolean onSupportNavigateUp() {
         return NavigationUI.navigateUp(mNavController, mAppBarConfiguration) || super.onSupportNavigateUp();
+    }
+
+//    methods to be called from fragments
+    public void hideNavigation(){
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+            hiddenHeader.setVisibility(View.VISIBLE);
+            Log.d("ToolBar", "Hidden via hideNavigation()");
+        }
+    }
+    public void showNavigation(){
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().show();
+            hiddenHeader.setVisibility(View.GONE);
+        }
     }
 }

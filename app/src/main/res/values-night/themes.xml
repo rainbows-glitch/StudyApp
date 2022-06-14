@@ -6,9 +6,9 @@
         <item name="colorPrimaryVariant">@color/darkNavSliderBG</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/white</item>
+        <item name="colorSecondary">@color/purple</item>
         <item name="colorSecondaryVariant">@color/purpleOnDark</item>
-        <item name="colorOnSecondary">@color/purple</item>
+        <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/darkBG</item>
         <!-- Customize your theme here. -->

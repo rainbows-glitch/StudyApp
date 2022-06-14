@@ -13,14 +13,18 @@
 
     <string name="signIn">Sign In</string>
 
-    <string name="emailHeader">Email</string>
+    <string name="emailHeader">Email or Student ID</string>
     <string name="contin">Continue</string>
     <string name="forgotPw"><u>Forgot Password?</u></string>
     <string name="password">Password</string>
     <string name="emailLabel">Enter your Email or Student ID</string>
     <string name="passwordLabel">Enter your password</string>
     <string name="signInWithGoogle">Sign in with Google</string>
+    <string name="signUpWithGoogle">Sign up with Google</string>
     <string name="registerP1">Don\'t have an Account?</string>
     <string name="registerP2"><u> Sign Up</u></string>
+    <string name="loginP1">Already have an Account?</string>
+    <string name="loginP2"><u> Sign In</u></string>
+    <string name="signUp">Sign Up</string>
     <string name="or">Or</string>
 </resources>

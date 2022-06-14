@@ -1,6 +1,228 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/loginLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".signUp"/>
+    tools:context=".login">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glassLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.08" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glassRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.92" />
+
+    <View
+        android:id="@+id/glass"
+        android:layout_width="0dp"
+        android:layout_height="648dp"
+        android:alpha=".58"
+        android:background="@drawable/glass_morphism"
+        android:contentDescription="@string/content_description"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/glassRight"
+        app:layout_constraintStart_toStartOf="@id/glassLeft" />
+
+    <TextView
+        android:id="@+id/loginLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/quicksand_semibold"
+        android:text="@string/signUp"
+        android:textColor="?attr/colorOnBackground"
+        android:textSize="26sp"
+        app:layout_constraintStart_toStartOf="@+id/glass"
+        app:layout_constraintTop_toTopOf="@+id/glass" />
+
+    <TextView
+        android:id="@+id/emailLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:fontFamily="@font/asap_semibold"
+        android:text="@string/emailHeader"
+        android:textColor="?attr/colorOnBackground"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/loginLabel"
+        app:layout_constraintTop_toBottomOf="@+id/loginLabel" />
+
+    <EditText
+        android:id="@+id/emailInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:autofillHints="emailAddress"
+        android:hint="@string/emailLabel"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp"
+        android:textColor="?attr/colorOnBackground"
+        android:textCursorDrawable="@null"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/glassRight"
+        app:layout_constraintStart_toStartOf="@+id/emailLabel"
+        app:layout_constraintTop_toBottomOf="@+id/emailLabel" />
+
+    <TextView
+        android:id="@+id/passwordLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/asap_semibold"
+        android:text="@string/password"
+        android:textColor="?attr/colorOnBackground"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/emailInput"
+        app:layout_constraintTop_toBottomOf="@+id/emailInput" />
+
+    <EditText
+        android:id="@+id/passwordInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:autofillHints="password"
+        android:hint="@string/passwordLabel"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:textColor="?attr/colorOnBackground"
+        android:textCursorDrawable="@null"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/glassRight"
+        app:layout_constraintStart_toStartOf="@+id/passwordLabel"
+        app:layout_constraintTop_toBottomOf="@+id/passwordLabel" />
+
+    <android.widget.Button
+        android:id="@+id/continueButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/continue_btn"
+        android:elevation="100dp"
+        android:fontFamily="@font/quicksand_semibold"
+        android:paddingStart="70dp"
+        android:paddingEnd="70dp"
+        android:paddingBottom="6dp"
+        android:text="@string/contin"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/passwordInput"
+        app:layout_constraintStart_toStartOf="@+id/passwordInput"
+        app:layout_constraintTop_toBottomOf="@+id/passwordInput" />
+
+    <TextView
+        android:id="@+id/orLinebreak"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/asap_semibold"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:text="@string/or"
+        android:textColor="?attr/colorOnBackground"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/continueButton"
+        app:layout_constraintStart_toStartOf="@+id/continueButton"
+        app:layout_constraintTop_toBottomOf="@+id/continueButton" />
+
+    <View
+        android:id="@+id/brLeft"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="?attr/colorOnBackground"
+        app:layout_constraintBottom_toBottomOf="@+id/orLinebreak"
+        app:layout_constraintEnd_toStartOf="@+id/orLinebreak"
+        app:layout_constraintStart_toStartOf="@+id/googleIcon"
+        app:layout_constraintTop_toTopOf="@+id/orLinebreak" />
+
+    <View
+        android:id="@+id/brRight"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="?attr/colorOnBackground"
+        app:layout_constraintBottom_toBottomOf="@+id/orLinebreak"
+        app:layout_constraintStart_toEndOf="@+id/orLinebreak"
+        app:layout_constraintEnd_toEndOf="@+id/oAuthLabel"
+        app:layout_constraintTop_toTopOf="@+id/orLinebreak" />
+
+    <View
+        android:id="@+id/OAuthBG"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/google_oauth_bg"
+        android:elevation="30dp"
+        app:layout_constraintBottom_toBottomOf="@+id/oAuthLabel"
+        app:layout_constraintEnd_toEndOf="@+id/oAuthLabel"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/googleIcon"
+        app:layout_constraintTop_toTopOf="@+id/oAuthLabel"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/googleIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/signInWithGoogle"
+        android:elevation="35dp"
+        android:src="@drawable/ic_btn_google_light"
+        app:layout_constraintBottom_toBottomOf="@+id/oAuthLabel"
+        app:layout_constraintEnd_toStartOf="@+id/oAuthLabel"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintTop_toTopOf="@+id/oAuthLabel"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/oAuthLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:elevation="35dp"
+        android:fontFamily="@font/roboto_medium"
+        android:paddingStart="16dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="12dp"
+        android:text="@string/signUpWithGoogle"
+        android:textColor="?attr/colorOnBackground"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/glassRight"
+        app:layout_constraintStart_toStartOf="@+id/glassLeft"
+        app:layout_constraintTop_toBottomOf="@+id/orLinebreak"
+        tools:ignore="TextContrastCheck" />
+
+    <TextView
+        android:id="@+id/registerP1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/asap_medium"
+        android:text="@string/loginP1"
+        android:textColor="?attr/colorOnBackground"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/glass"
+        app:layout_constraintEnd_toStartOf="@+id/glassRight"
+        app:layout_constraintStart_toStartOf="@+id/glassLeft"
+        app:layout_constraintTop_toBottomOf="@+id/oAuthLabel" />
+
+    <TextView
+        android:id="@+id/registerP2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/asap_medium"
+        android:text="@string/loginP2"
+        android:textColor="?attr/colorSecondaryVariant"
+        android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/registerP1"
+        app:layout_constraintStart_toEndOf="@+id/registerP1" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
