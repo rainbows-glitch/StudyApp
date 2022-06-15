@@ -1,6 +1,6 @@
 package com.example.studyApp;
 
-import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -12,15 +12,24 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import android.content.res.Resources;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.internal.IStatusCallback;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 public class MainActivity extends AppCompatActivity {
 //    declare variables
@@ -32,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ImageView foreWave;
     private Guideline alphaGuide;
+
+    private GoogleSignInClient client;
+    private GoogleSignInOptions options;
 
     @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -60,15 +72,12 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(drawer, mNavController);
 
 //        called when item from navSlider selected
-        drawer.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() != R.id.close_nav) {
-                    NavigationUI.onNavDestinationSelected(item, mNavController);
-                }
-                drawerLayout.closeDrawers();
-                return false;
+        drawer.setNavigationItemSelectedListener(item -> {
+            if (item.getItemId() != R.id.close_nav) {
+                NavigationUI.onNavDestinationSelected(item, mNavController);
             }
+            drawerLayout.closeDrawers();
+            return false;
         });
 
 //        centre header
@@ -84,6 +93,14 @@ public class MainActivity extends AppCompatActivity {
         foreWave = findViewById(R.id.foreWave);
         alphaGuide = findViewById(R.id.alphaGuide);
         foreWave.post(() -> alphaGuide.setGuidelineEnd(foreWave.getHeight() / 7));
+
+//        Google Sign In
+        options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken("332292739647-j5dvfu77t9ecudtj6r8kkk35rhbo0lqb.apps.googleusercontent.com")
+                .requestEmail()
+                .build();
+        client = GoogleSignIn.getClient(this, options);
+
 
     }
 
@@ -105,6 +122,38 @@ public class MainActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().show();
             hiddenHeader.setVisibility(View.GONE);
+        }
+    }
+
+    public void googleSignInClicked(){
+        Intent intent = client.getSignInIntent();
+        startActivityForResult(intent, 10001);
+    }
+
+    public void googleSignOutPressed(){client.revokeAccess();}
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 10001){
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            GoogleSignInAccount account;
+            try {
+                account = task.getResult(ApiException.class);
+                AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+                FirebaseAuth.getInstance().signInWithCredential(credential)
+                        .addOnCompleteListener(task1 ->{
+                            if(task.isSuccessful()){
+                                startActivity(new Intent(this, MainActivity.class));
+                                Log.d("login","Logged In");
+                            }else{
+                                Log.d("login", task.getException().getMessage());
+                            }
+                        });
+            } catch (ApiException err) {
+                err.printStackTrace();
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.example.studyApp;
 
 import android.os.Bundle;
+
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
@@ -16,7 +17,7 @@ import android.widget.TextView;
 
 public class login extends Fragment {
 //    declare
-    private View glass;
+    private View glass, googleSignInBG;
     private ConstraintLayout loginLayout;
     private TextView emailLabel, passwordLabel, oAuthLabel, register1, register2;
     private EditText emailInput, passwordInput;
@@ -38,6 +39,7 @@ public class login extends Fragment {
         googleIcon = view.findViewById(R.id.googleIcon);
         register1 = view.findViewById(R.id.registerP1);
         register2 = view.findViewById(R.id.registerP2);
+        googleSignInBG = view.findViewById(R.id.OAuthBG);
 
        ((MainActivity)getActivity()).hideNavigation();
 
@@ -81,6 +83,8 @@ public class login extends Fragment {
 //        switch to signUp fragment
         register1.setOnClickListener(view1 -> NavHostFragment.findNavController(this).navigate(R.id.login2SignUp));
         register2.setOnClickListener(view1 -> NavHostFragment.findNavController(this).navigate(R.id.login2SignUp));
+
+        googleSignInBG.setOnClickListener(view12 -> ((MainActivity) getActivity()).googleSignInClicked());
 
         return view;
     }
