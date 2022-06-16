@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 public class login extends Fragment {
 //    declare
-    private View glass, googleSignInBG;
+    private View glass;
     private ConstraintLayout loginLayout;
     private TextView emailLabel, passwordLabel, oAuthLabel, register1, register2;
     private EditText emailInput, passwordInput;
@@ -39,7 +39,6 @@ public class login extends Fragment {
         googleIcon = view.findViewById(R.id.googleIcon);
         register1 = view.findViewById(R.id.registerP1);
         register2 = view.findViewById(R.id.registerP2);
-        googleSignInBG = view.findViewById(R.id.OAuthBG);
 
        ((MainActivity)getActivity()).hideNavigation();
 
@@ -84,7 +83,7 @@ public class login extends Fragment {
         register1.setOnClickListener(view1 -> NavHostFragment.findNavController(this).navigate(R.id.login2SignUp));
         register2.setOnClickListener(view1 -> NavHostFragment.findNavController(this).navigate(R.id.login2SignUp));
 
-        googleSignInBG.setOnClickListener(view12 -> ((MainActivity) getActivity()).googleSignInClicked());
+        view.findViewById(R.id.OAuthBG).setOnClickListener(view12 -> ((MainActivity) getActivity()).googleSignInClicked());
 
         return view;
     }

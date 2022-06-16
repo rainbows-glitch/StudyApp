@@ -8,12 +8,15 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class signUp extends Fragment {
 //    declare
@@ -83,6 +86,66 @@ public class signUp extends Fragment {
         register1.setOnClickListener(view1 -> NavHostFragment.findNavController(this).navigate(R.id.signUp2Login));
         register2.setOnClickListener(view1 -> NavHostFragment.findNavController(this).navigate(R.id.signUp2Login));
 
+//        sign up with email(/id) and password
+        view.findViewById(R.id.continueButton).setOnClickListener(view13 -> {
+            boolean isEmailValueSafe = false, isPasswordValueSafe = false;
+
+//          Email validation
+            String emailValue = emailInput.getText().toString();
+            if (emailValue.contains("@") && emailValue.length() >= 2) {
+                isEmailValueSafe = true;
+                Log.d("signUp", emailValue);
+            } else if (emailValue.length() >= 5) {
+                try { //assuming user inputs ID instead of email
+                    for (int i = 0; i < emailValue.length(); i++) {
+                        Integer.parseInt(Character.toString(emailValue.charAt(i))); //try to raise NumberFormatException to check if input is numbers (ensure its a ID)
+                    }
+                    emailValue = emailValue + "@students.mrgs.school.nz";
+                    isEmailValueSafe = true;
+                    Log.d("signUp", emailValue);
+
+                } catch (NumberFormatException err) {
+                    Log.d("signUp", "Email input not valid. Error:" + err.getMessage());
+                }
+            } else {
+                Log.d("signUp", "Invalid Email Input"); //TODO: add snackBars?
+            }
+
+//          Password validation
+            String passwordValue = passwordInput.getText().toString();
+            if(passwordValue.length() >= 10){
+                boolean upperCasePresent = false, lowerCasePresent = false, numberPresent = false;
+                for(int i = 0; i < passwordValue.length(); i++){
+                    if(Character.isUpperCase(passwordValue.charAt(i))){
+                        upperCasePresent = true;
+                    }else if(Character.isLowerCase(passwordValue.charAt(i))){
+                        lowerCasePresent = true;
+                    }else if(!Character.isAlphabetic(passwordValue.charAt(i))){
+                        numberPresent = true;
+                    }
+                }
+                if (upperCasePresent && lowerCasePresent && numberPresent){
+                    isPasswordValueSafe = true;
+                    Log.d("PW", "Password is Safe");
+
+//              TODO: Again. SnackBars need to be added
+                }else{
+                    Log.d("PW", "Password needs to include both upper and lower case characters. Numbers need to be present too");
+                }
+        }else{
+                Log.d("PW", "password too short");
+            }
+
+//          If both password and email are valid(/safe)
+            if(isEmailValueSafe && isPasswordValueSafe){
+                ((MainActivity)getActivity()).signUp(emailValue, passwordValue);
+            }
+        });
+
+//        sign in/up with google
+            view.findViewById(R.id.OAuthBG).setOnClickListener(view12 -> ((MainActivity) getActivity()).googleSignInClicked());
+
         return view;
+
     }
 }

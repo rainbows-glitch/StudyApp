@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +31,7 @@ public class home extends Fragment {
         Button mButton = view.findViewById(R.id.button);
         mButton.setOnClickListener(view1 -> {
             mAuth.signOut();
-            ((MainActivity) getActivity()).googleSignOutPressed();
+            ((MainActivity) getActivity()).signOutPressed();
             NavHostFragment.findNavController(getParentFragment()).navigate(R.id.home2login);
             getActivity().getSupportFragmentManager().popBackStack();
         });
