@@ -1,7 +1,5 @@
 package com.example.studyApp;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -13,27 +11,13 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthProvider;
 
 public class MainActivity extends AppCompatActivity {
 //    declare variables
@@ -45,10 +29,6 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ImageView foreWave;
     private Guideline alphaGuide;
-
-    private FirebaseAuth mAuth;
-    private GoogleSignInClient client;
-    private GoogleSignInOptions options;
 
     @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
         assert navHost != null;
         mNavController = navHost.getNavController();
         NavigationView drawer = findViewById(R.id.drawer);
-        mAuth = FirebaseAuth.getInstance();
 
 //        tells system to use toolbar as app bar
         setSupportActionBar(toolBar);
@@ -86,27 +65,10 @@ public class MainActivity extends AppCompatActivity {
             return false;
         });
 
-//        centre header
-        mConstraintSet = new ConstraintSet();
-        mConstraintSet.clone(toolBarLayout);
-        toolBar.post(() -> header.post(() -> {
-            int whiteSpace = toolBar.getWidth() - header.getWidth();
-            mConstraintSet.setMargin(header.getId(), ConstraintSet.END, whiteSpace / 2);
-            mConstraintSet.applyTo(toolBarLayout);
-        }));
-
 //        adjust alphaWave
         foreWave = findViewById(R.id.foreWave);
         alphaGuide = findViewById(R.id.alphaGuide);
         foreWave.post(() -> alphaGuide.setGuidelineEnd(foreWave.getHeight() / 7));
-
-
-//        Google Sign In
-        options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("332292739647-j5dvfu77t9ecudtj6r8kkk35rhbo0lqb.apps.googleusercontent.com")
-                .requestEmail()
-                .build();
-        client = GoogleSignIn.getClient(this, options);
     }
 
 //    navigate from deep-level to top-level page
@@ -127,51 +89,15 @@ public class MainActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().show();
             hiddenHeader.setVisibility(View.GONE);
+            //        centre header
+            mConstraintSet = new ConstraintSet();
+            mConstraintSet.clone(toolBarLayout);
+            toolBar.post(() -> header.post(() -> {
+                int whiteSpace = toolBar.getWidth() - header.getWidth();
+                mConstraintSet.setMargin(header.getId(), ConstraintSet.END, whiteSpace / 2);
+                mConstraintSet.applyTo(toolBarLayout);
+            }));
+            Log.d("ToolBar", "shown via showNavigation()");
         }
     }
-
-    public void googleSignInClicked(){
-        Intent intent = client.getSignInIntent();
-        startActivityForResult(intent, 10001);
-    }
-    public void signOutPressed(){client.revokeAccess();}
-
-    public void signUp(String email, String password){
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful()) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d("SignUp", "createUserWithEmail:success");
-                        startActivity(new Intent(this, MainActivity.class));
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Log.w("SignUp", "createUserWithEmail:failure", task.getException());
-                    }
-                });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 10001) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            GoogleSignInAccount account;
-            try {
-                account = task.getResult(ApiException.class);
-                AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
-                mAuth.signInWithCredential(credential)
-                        .addOnCompleteListener(task1 -> {
-                            if (task.isSuccessful()) {
-                                startActivity(new Intent(this, MainActivity.class));
-                                Log.d("login", "Logged In");
-                            } else {
-                                Log.d("login", task.getException().getMessage());
-                            }
-                        });
-            } catch (ApiException err) {
-                err.printStackTrace();
-            }
-        }
-    }
-
 }

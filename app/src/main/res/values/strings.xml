@@ -27,4 +27,7 @@
     <string name="loginP2"><u> Sign In</u></string>
     <string name="signUp">Sign Up</string>
     <string name="or">Or</string>
+    <string name="forgotPWLabel">Forgot Password?</string>
+    <string name="forgotPWInstructions">Enter your email address or Student ID and we\'ll send you a link to reset your password.</string>
+    <string name="returnLoginLabel">Click here to return to login page</string>
 </resources>

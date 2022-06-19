@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/forgotPWLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".forgot_pw">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glassLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.08" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glassRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.92" />
+
+    <View
+        android:id="@+id/glass"
+        android:layout_width="0dp"
+        android:layout_height="648dp"
+        android:alpha=".58"
+        android:background="@drawable/glass_morphism"
+        android:contentDescription="@string/content_description"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/glassRight"
+        app:layout_constraintStart_toStartOf="@id/glassLeft" />
+
+    <TextView
+        android:id="@+id/forgotLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/quicksand_semibold"
+        android:text="@string/forgotPWLabel"
+        android:textColor="?attr/colorOnBackground"
+        android:textSize="26sp"
+        app:layout_constraintStart_toStartOf="@+id/glass"
+        app:layout_constraintTop_toTopOf="@+id/glass" />
+
+    <TextView
+        android:id="@+id/forgotPWInstructions"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/asap_medium"
+        android:text="@string/forgotPWInstructions"
+        android:textColor="?attr/colorOnBackground"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/glass"
+        app:layout_constraintStart_toStartOf="@+id/glass"
+        app:layout_constraintTop_toBottomOf="@+id/forgotLabel" />
+
+    <TextView
+        android:id="@+id/emailLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:fontFamily="@font/asap_semibold"
+        android:text="@string/emailHeader"
+        android:textColor="?attr/colorOnBackground"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/forgotPWInstructions"
+        app:layout_constraintTop_toBottomOf="@+id/forgotPWInstructions" />
+
+    <EditText
+        android:id="@+id/emailInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:autofillHints="emailAddress"
+        android:hint="@string/emailLabel"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp"
+        android:textColor="?attr/colorOnBackground"
+        android:textCursorDrawable="@null"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/glassRight"
+        app:layout_constraintStart_toStartOf="@+id/emailLabel"
+        app:layout_constraintTop_toBottomOf="@+id/emailLabel" />
+
+    <android.widget.Button
+        android:id="@+id/continueButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-3dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/continue_btn"
+        android:elevation="100dp"
+        android:fontFamily="@font/quicksand_semibold"
+        android:paddingStart="70dp"
+        android:paddingEnd="70dp"
+        android:paddingBottom="6dp"
+        android:text="@string/contin"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/emailInput"
+        app:layout_constraintStart_toStartOf="@+id/emailInput"
+        app:layout_constraintTop_toBottomOf="@+id/emailInput"/>
+
+    <TextView
+        android:id="@+id/backLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
+        android:fontFamily="@font/asap_medium"
+        android:paddingStart="5dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="10dp"
+        android:text="@string/returnLoginLabel"
+        android:textColor="?attr/colorOnBackground"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/glass"
+        app:layout_constraintEnd_toStartOf="@+id/glassRight" />
+
+    <ImageView
+        android:id="@+id/returnToLogin"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="Click to return to Login Page"
+        android:src="@drawable/ic_back_arrow"
+        app:layout_constraintBottom_toBottomOf="@+id/backLabel"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@+id/backLabel"
+        app:layout_constraintTop_toTopOf="@+id/backLabel"
+        app:tint="?attr/colorOnBackground" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

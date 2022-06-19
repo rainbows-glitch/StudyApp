@@ -1,19 +1,33 @@
 package com.example.studyApp;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 public class login extends Fragment {
 //    declare
@@ -22,6 +36,10 @@ public class login extends Fragment {
     private TextView emailLabel, passwordLabel, oAuthLabel, register1, register2;
     private EditText emailInput, passwordInput;
     private ImageView googleIcon;
+
+    private FirebaseAuth mAuth;
+    private GoogleSignInClient client;
+    private GoogleSignInOptions options;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,6 +57,8 @@ public class login extends Fragment {
         googleIcon = view.findViewById(R.id.googleIcon);
         register1 = view.findViewById(R.id.registerP1);
         register2 = view.findViewById(R.id.registerP2);
+
+        mAuth = FirebaseAuth.getInstance();
 
        ((MainActivity)getActivity()).hideNavigation();
 
@@ -83,8 +103,92 @@ public class login extends Fragment {
         register1.setOnClickListener(view1 -> NavHostFragment.findNavController(this).navigate(R.id.login2SignUp));
         register2.setOnClickListener(view1 -> NavHostFragment.findNavController(this).navigate(R.id.login2SignUp));
 
-        view.findViewById(R.id.OAuthBG).setOnClickListener(view12 -> ((MainActivity) getActivity()).googleSignInClicked());
+//        switch to forgotPW fragment
+        view.findViewById(R.id.forgotPW).setOnClickListener(view14 -> NavHostFragment.findNavController(this).navigate(R.id.login2ForgotPW));
+
+        //enter button
+        emailInput.setOnEditorActionListener((textView, i, keyEvent) -> {
+            if(i == 100 || i == EditorInfo.IME_NULL){
+                passwordInput.requestFocus();
+                return true;
+            } else {return false;}
+        });
+        passwordInput.setOnEditorActionListener((textView, i, keyEvent) -> {
+            if(i == 100 || i == EditorInfo.IME_NULL){
+                signInUsingPW(view.findViewById(R.id.emailInput), view.findViewById(R.id.passwordInput));
+                return true;
+            } else {return false;}
+        });
+
+//        Sign user in using email and password
+        view.findViewById(R.id.continueButton).setOnClickListener(view13 -> {
+            signInUsingPW(view.findViewById(R.id.emailInput), view.findViewById(R.id.passwordInput));
+        });
+
+        options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken("332292739647-j5dvfu77t9ecudtj6r8kkk35rhbo0lqb.apps.googleusercontent.com")
+                .requestEmail()
+                .build();
+        client = GoogleSignIn.getClient(requireContext(), options);
+
+        view.findViewById(R.id.OAuthBG).setOnClickListener(view12 -> googleSignInClicked());
 
         return view;
     }
+
+    public void signIn(String email, String password){
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(requireActivity(), task -> {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d("SignUp", "createUserWithEmail:success");
+                        NavHostFragment.findNavController(this).navigate(R.id.login2Home);
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w("SignUp", "createUserWithEmail:failure", task.getException());
+                    }
+                });
+    }
+
+    public void googleSignInClicked(){
+        Intent intent = client.getSignInIntent();
+        startActivityForResult(intent, 10001);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 10001) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            GoogleSignInAccount account;
+            try {
+                account = task.getResult(ApiException.class);
+                AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+                mAuth.signInWithCredential(credential)
+                        .addOnCompleteListener(task1 -> {
+                            if (task.isSuccessful()) {
+                                NavHostFragment.findNavController(this).navigate(R.id.login2Home);
+                                Log.d("login", "Logged In");
+                            } else {
+                                Log.d("login", task.getException().getMessage());
+                            }
+                        });
+            } catch (ApiException err) {
+                err.printStackTrace();
+            }
+        }
+    }
+
+    public void signInUsingPW(EditText emailInput, EditText passwordInput){
+        String emailValue = emailInput.getText().toString();
+        String passwordValue = passwordInput.getText().toString();
+        if(!emailValue.trim().isEmpty() && !passwordValue.trim().isEmpty()){
+            if(!emailValue.contains("@")){
+                emailValue += "@students.mrgs.school.nz";
+            }
+            signIn(emailValue, passwordValue);
+            Log.d("LOGIN","Hi"); //TODO: snackBar
+        }else{Log.d("LOGIN","Empty Field");}
+    }
+
 }

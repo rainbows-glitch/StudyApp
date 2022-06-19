@@ -26,5 +26,6 @@
     <color name="glassMorphismLightFill">#FFFCFCFC</color>
 
     <color name="gOAuthDark">#FF4285F4</color>
+    <color name="purpleOnSelect">#FF6A30C8</color>
 
 </resources>

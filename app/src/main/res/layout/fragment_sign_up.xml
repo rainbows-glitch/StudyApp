@@ -33,7 +33,7 @@
         app:layout_constraintStart_toStartOf="@id/glassLeft" />
 
     <TextView
-        android:id="@+id/loginLabel"
+        android:id="@+id/signUpLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -54,8 +54,8 @@
         android:text="@string/emailHeader"
         android:textColor="?attr/colorOnBackground"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/loginLabel"
-        app:layout_constraintTop_toBottomOf="@+id/loginLabel" />
+        app:layout_constraintStart_toStartOf="@+id/signUpLabel"
+        app:layout_constraintTop_toBottomOf="@+id/signUpLabel" />
 
     <EditText
         android:id="@+id/emailInput"
@@ -215,7 +215,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/glass"
         app:layout_constraintEnd_toStartOf="@+id/glassRight"
         app:layout_constraintStart_toStartOf="@+id/glassLeft"
-        app:layout_constraintTop_toBottomOf="@+id/oAuthLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/oAuthLabel"
+        app:layout_constraintVertical_bias="0.6" />
 
     <TextView
         android:id="@+id/registerP2"
