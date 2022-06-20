@@ -16,6 +16,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -89,18 +90,23 @@ public class forgot_pw extends Fragment {
 
     public void resetPW(EditText email) {
         String emailValue = email.getText().toString().trim();
-        if (!emailValue.isEmpty()) {
+        if (!emailValue.trim().isEmpty()) {
             if (!emailValue.contains("@")) {
                 emailValue += "@students.mrgs.school.nz";
             }
             FirebaseAuth.getInstance().sendPasswordResetEmail(emailValue)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
+                            Toast.makeText(getContext(), "An email to reset your password has been sent to this Inbox", Toast.LENGTH_LONG).show();
                             Log.d("ForgotPW", "Password Reset sent.");
                             NavHostFragment.findNavController(this).navigate(R.id.forgotPW2Login);
+                        } else {
+                            Toast.makeText(getContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            Log.d("ForgotPassword",task.getException().getMessage());
                         }
                     });
         } else {
+            Toast.makeText(getContext(), "Please enter your Email", Toast.LENGTH_LONG).show();
             Log.d("ForgotPW", "Email Input Empty");
         }
     }

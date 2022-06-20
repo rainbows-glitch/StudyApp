@@ -18,6 +18,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -145,6 +146,7 @@ public class login extends Fragment {
                         NavHostFragment.findNavController(this).navigate(R.id.login2Home);
                     } else {
                         // If sign in fails, display a message to the user.
+                        Toast.makeText(getContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         Log.w("SignUp", "createUserWithEmail:failure", task.getException());
                     }
                 });
@@ -170,6 +172,7 @@ public class login extends Fragment {
                                 NavHostFragment.findNavController(this).navigate(R.id.login2Home);
                                 Log.d("login", "Logged In");
                             } else {
+                                Toast.makeText(getContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
                                 Log.d("login", task.getException().getMessage());
                             }
                         });
@@ -187,8 +190,10 @@ public class login extends Fragment {
                 emailValue += "@students.mrgs.school.nz";
             }
             signIn(emailValue, passwordValue);
-            Log.d("LOGIN","Hi"); //TODO: snackBar
-        }else{Log.d("LOGIN","Empty Field");}
+        }else{
+            Toast.makeText(getContext(), "Please enter your Email and Password", Toast.LENGTH_LONG).show();
+            Log.d("LOGIN","Empty Field");
+        }
     }
 
 }
