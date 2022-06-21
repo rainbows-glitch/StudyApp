@@ -89,7 +89,6 @@
         android:id="@+id/passwordInput"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
         android:autofillHints="password"
         android:hint="@string/passwordLabel"
         android:inputType="textPassword"
@@ -97,7 +96,7 @@
         android:textColor="?attr/colorOnBackground"
         android:textCursorDrawable="@null"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/glassRight"
+        app:layout_constraintEnd_toStartOf="@+id/eyeIcon"
         app:layout_constraintStart_toStartOf="@+id/passwordLabel"
         app:layout_constraintTop_toBottomOf="@+id/passwordLabel" />
 
@@ -117,8 +116,8 @@
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/passwordInput"
-        app:layout_constraintStart_toStartOf="@+id/passwordInput"
+        app:layout_constraintEnd_toEndOf="@+id/emailInput"
+        app:layout_constraintStart_toStartOf="@+id/emailInput"
         app:layout_constraintTop_toBottomOf="@+id/passwordInput" />
 
     <TextView
@@ -209,6 +208,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/asap_medium"
+        android:paddingStart="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:text="@string/loginP1"
         android:textColor="?attr/colorOnBackground"
         android:textSize="16sp"
@@ -223,10 +225,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/asap_medium"
+        android:paddingTop="10dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="10dp"
         android:text="@string/loginP2"
         android:textColor="?attr/colorSecondaryVariant"
         android:textSize="16sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/registerP1"
         app:layout_constraintStart_toEndOf="@+id/registerP1" />
+
+    <ImageView
+        android:id="@+id/eyeIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/ic_eye"
+        app:layout_constraintBottom_toBottomOf="@+id/passwordInput"
+        app:layout_constraintEnd_toEndOf="@+id/emailInput"
+        app:layout_constraintTop_toTopOf="@+id/passwordInput"
+        app:tint="?attr/colorOnBackground" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

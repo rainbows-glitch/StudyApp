@@ -29,8 +29,6 @@ public class home extends Fragment {
 
         if(mAuth.getCurrentUser() == null){
             NavHostFragment.findNavController(this).navigate(R.id.home2login);
-            Log.d("Home","Checking if signed in");
-//            getActivity().getSupportFragmentManager().popBackStack(); //to keep back button functional and avoid infinite loop
         }
 
         GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)

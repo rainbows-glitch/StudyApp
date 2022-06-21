@@ -1,14 +1,19 @@
 package com.example.studyApp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,6 +46,19 @@ public class login extends Fragment {
     private FirebaseAuth mAuth;
     private GoogleSignInClient client;
     private GoogleSignInOptions options;
+    private boolean passwordToggle = true;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                requireActivity().finish();  //to keep back button functional and avoid infinite loop
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,10 +79,10 @@ public class login extends Fragment {
 
         mAuth = FirebaseAuth.getInstance();
 
-       ((MainActivity)getActivity()).hideNavigation();
+       ((MainActivity)requireActivity()).hideNavigation();
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
-        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        requireActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
 //        set glass height to be 85% of window height
         float vh = displayMetrics.heightPixels/100;
@@ -116,14 +134,35 @@ public class login extends Fragment {
         });
         passwordInput.setOnEditorActionListener((textView, i, keyEvent) -> {
             if(i == 100 || i == EditorInfo.IME_NULL){
-                signInUsingPW(view.findViewById(R.id.emailInput), view.findViewById(R.id.passwordInput));
+                if(isOnline()){
+                    signInUsingPW(view.findViewById(R.id.emailInput), view.findViewById(R.id.passwordInput));
+                }else{
+                    Toast.makeText(getContext(), "You seem to be offline. Please connect to the Internet", Toast.LENGTH_LONG).show();
+                }
                 return true;
             } else {return false;}
         });
 
 //        Sign user in using email and password
         view.findViewById(R.id.continueButton).setOnClickListener(view13 -> {
-            signInUsingPW(view.findViewById(R.id.emailInput), view.findViewById(R.id.passwordInput));
+            if(isOnline()){
+                signInUsingPW(view.findViewById(R.id.emailInput), view.findViewById(R.id.passwordInput));
+            }else{
+                Toast.makeText(getContext(), "You seem to be offline. Please connect to the Internet", Toast.LENGTH_LONG).show();
+            }
+        });
+
+//        show/hide password
+        view.findViewById(R.id.eyeIcon).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(passwordToggle){
+                    passwordInput.setTransformationMethod(null);
+                }else{
+                    passwordInput.setTransformationMethod(new PasswordTransformationMethod());
+                }
+                passwordToggle = !passwordToggle;
+            }
         });
 
         options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -153,8 +192,12 @@ public class login extends Fragment {
     }
 
     public void googleSignInClicked(){
-        Intent intent = client.getSignInIntent();
-        startActivityForResult(intent, 10001);
+        if(isOnline()){
+            Intent intent = client.getSignInIntent();
+            startActivityForResult(intent, 10001);
+        }else{
+            Toast.makeText(getContext(), "You seem to be offline. Please connect to the Internet", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -194,6 +237,13 @@ public class login extends Fragment {
             Toast.makeText(getContext(), "Please enter your Email and Password", Toast.LENGTH_LONG).show();
             Log.d("LOGIN","Empty Field");
         }
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) requireActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null &&
+                cm.getActiveNetworkInfo().isConnectedOrConnecting();
     }
 
 }

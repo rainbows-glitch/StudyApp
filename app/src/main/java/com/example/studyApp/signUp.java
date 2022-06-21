@@ -1,6 +1,8 @@
 package com.example.studyApp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -9,6 +11,7 @@ import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.text.method.PasswordTransformationMethod;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,6 +48,7 @@ public class signUp extends Fragment {
 
     private FirebaseAuth mAuth;
     private GoogleSignInClient client;
+    private boolean passwordToggle = true;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -109,11 +113,34 @@ public class signUp extends Fragment {
         register2.setOnClickListener(view1 -> NavHostFragment.findNavController(this).navigate(R.id.signUp2Login));
 
 //        sign up with email(/id) and password
-        view.findViewById(R.id.continueButton).setOnClickListener(view13 -> signUpUsingEmail());
+        view.findViewById(R.id.continueButton).setOnClickListener(view13 -> {
+            if(isOnline()){
+                signUpUsingEmail();
+            }else{
+                Toast.makeText(getContext(), "You seem to be offline. Please connect to the Internet", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        //        show/hide password
+        view.findViewById(R.id.eyeIcon).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(passwordToggle){
+                    passwordInput.setTransformationMethod(null);
+                }else{
+                    passwordInput.setTransformationMethod(new PasswordTransformationMethod());
+                }
+                passwordToggle = !passwordToggle;
+            }
+        });
 
         passwordInput.setOnEditorActionListener((textView, i, keyEvent) -> {
             if(i == 100 || i == EditorInfo.IME_NULL){
-                signUpUsingEmail();
+                if(isOnline()){
+                    signUpUsingEmail();
+                }else{
+                    Toast.makeText(getContext(), "You seem to be offline. Please connect to the Internet", Toast.LENGTH_LONG).show();
+                }
                 return true;
             } else {return false;}
         });
@@ -155,8 +182,12 @@ public class signUp extends Fragment {
     }
 
     public void googleSignInClicked(){
-        Intent intent = client.getSignInIntent();
-        startActivityForResult(intent, 10001);
+        if(isOnline()){
+            Intent intent = client.getSignInIntent();
+            startActivityForResult(intent, 10001);
+        }else{
+            Toast.makeText(getContext(), "You seem to be offline. Please connect to the Internet", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -213,7 +244,7 @@ public class signUp extends Fragment {
             return;
         }
 
-        //          Password validation
+//        Password validation
         if(emailProvided) {
             String passwordValue = passwordInput.getText().toString();
             if (passwordValue.length() >= 10) {
@@ -247,6 +278,12 @@ public class signUp extends Fragment {
                 Log.d("PW", "password too short");
             }
         }
+    }
 
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) requireActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null &&
+                cm.getActiveNetworkInfo().isConnectedOrConnecting();
     }
 }
