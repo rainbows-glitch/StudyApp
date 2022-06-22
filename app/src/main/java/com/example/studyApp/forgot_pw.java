@@ -1,5 +1,7 @@
 package com.example.studyApp;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -74,13 +76,21 @@ public class forgot_pw extends Fragment {
 
         //reset password (via email)
         view.findViewById(R.id.continueButton).setOnClickListener(view12 -> {
-            resetPW(email);
+            if(isOnline()){
+                resetPW(email);
+            }else{
+                Toast.makeText(getContext(), "You seem to be offline. Please connect to the Internet", Toast.LENGTH_LONG).show();
+            }
         });
 
         //react to enter button
         email.setOnEditorActionListener((textView, i, keyEvent) -> {
             if(i == 100 || i == EditorInfo.IME_NULL){
-                resetPW(email);
+                if(isOnline()){
+                    resetPW(email);
+                }else{
+                    Toast.makeText(getContext(), "You seem to be offline. Please connect to the Internet", Toast.LENGTH_LONG).show();
+                }
                 return true;
             } else {return false;}
         });
@@ -110,4 +120,12 @@ public class forgot_pw extends Fragment {
             Log.d("ForgotPW", "Email Input Empty");
         }
     }
+
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) requireActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null &&
+                cm.getActiveNetworkInfo().isConnectedOrConnecting();
+    }
+
 }
