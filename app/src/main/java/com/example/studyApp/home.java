@@ -3,8 +3,13 @@ package com.example.studyApp;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +25,8 @@ public class home extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseUser user;
 
+    private RecyclerView horizontalRecyclerView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
@@ -34,7 +41,6 @@ public class home extends Fragment {
         if(user == null){
             NavHostFragment.findNavController(this).navigate(R.id.home2login);
         }
-
         int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         String greeting;
         if(hour >= 1 && hour < 12){
@@ -55,6 +61,12 @@ public class home extends Fragment {
                 break;
             }
         }
+
+        RecyclerView rv = view.findViewById(R.id.horizontalRecycle);
+        rv.setAdapter(new sliderAdapter(getContext()));
+        SnapHelper snapHelper = new LinearSnapHelper();
+        snapHelper.attachToRecyclerView(rv);
+        rv.scrollToPosition(10);
 
         return view;
     }
