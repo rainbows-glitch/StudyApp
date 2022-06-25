@@ -49,19 +49,18 @@
         android:id="@+id/emailLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="30dp"
         android:fontFamily="@font/asap_semibold"
         android:text="@string/emailHeader"
         android:textColor="?attr/colorOnBackground"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/signUpLabel"
-        app:layout_constraintTop_toBottomOf="@+id/signUpLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/nameInput" />
 
     <EditText
         android:id="@+id/emailInput"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
         android:autofillHints="emailAddress"
         android:hint="@string/emailLabel"
         android:inputType="textEmailAddress"
@@ -69,7 +68,7 @@
         android:textColor="?attr/colorOnBackground"
         android:textCursorDrawable="@null"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/glassRight"
+        app:layout_constraintEnd_toEndOf="@+id/nameInput"
         app:layout_constraintStart_toStartOf="@+id/emailLabel"
         app:layout_constraintTop_toBottomOf="@+id/emailLabel" />
 
@@ -77,7 +76,7 @@
         android:id="@+id/passwordLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="30dp"
         android:fontFamily="@font/asap_semibold"
         android:text="@string/password"
         android:textColor="?attr/colorOnBackground"
@@ -246,5 +245,33 @@
         app:layout_constraintEnd_toEndOf="@+id/emailInput"
         app:layout_constraintTop_toTopOf="@+id/passwordInput"
         app:tint="?attr/colorOnBackground" />
+
+    <TextView
+        android:id="@+id/nameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/asap_semibold"
+        android:text="Full Name"
+        android:textColor="?attr/colorOnBackground"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/signUpLabel"
+        app:layout_constraintTop_toBottomOf="@+id/signUpLabel" />
+
+    <EditText
+        android:id="@+id/nameInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:autofillHints="password"
+        android:hint="Please enter your full name"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:textColor="?attr/colorOnBackground"
+        android:textCursorDrawable="@null"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/glassRight"
+        app:layout_constraintStart_toStartOf="@+id/nameLabel"
+        app:layout_constraintTop_toBottomOf="@+id/nameLabel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

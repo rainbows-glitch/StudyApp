@@ -25,7 +25,8 @@ public class home extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseUser user;
 
-    private RecyclerView horizontalRecyclerView;
+    private int itemPosition;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,34 +41,34 @@ public class home extends Fragment {
 //        check if user is signed in
         if(user == null){
             NavHostFragment.findNavController(this).navigate(R.id.home2login);
-        }
-        int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-        String greeting;
-        if(hour >= 1 && hour < 12){
-            greeting = "Good Morning";
-        }else if(hour >=11 && hour <18){
-            greeting = "Good Afternoon";
         }else{
-            greeting = "Good Evening";
-        }
-        TextView welcomeHeader = view.findViewById(R.id.welcomeHeader), welcomeName = view.findViewById(R.id.welcomeName);
-        welcomeHeader.setText(greeting);
-
-        String name = user.getDisplayName().trim();
-        for(int i = 0; i < name.length(); i++){
-            if (Character.isWhitespace(name.charAt(i))){
-                name = Character.toUpperCase(name.charAt(0)) + name.substring(1, i);
-                welcomeName.setText(name);
-                break;
+            int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+            String greeting;
+            if(hour >= 1 && hour < 12){
+                greeting = "Good Morning";
+            }else if(hour >=11 && hour <18){
+                greeting = "Good Afternoon";
+            }else{
+                greeting = "Good Evening";
             }
+            TextView welcomeHeader = view.findViewById(R.id.welcomeHeader), welcomeName = view.findViewById(R.id.welcomeName);
+            welcomeHeader.setText(greeting);
+
+            String name = user.getDisplayName();
+            for(int i = 0; i < name.length(); i++){
+                if (Character.isWhitespace(name.charAt(i))){
+                    name = Character.toUpperCase(name.charAt(0)) + name.substring(1, i);
+                    welcomeName.setText(name);
+                    break;
+                }
+            }
+
+            RecyclerView rv = view.findViewById(R.id.horizontalRecycle);
+            rv.setAdapter(new sliderAdapter(getContext()));
+            SnapHelper snapHelper = new LinearSnapHelper();
+            snapHelper.attachToRecyclerView(rv);
+            rv.scrollToPosition(10);
         }
-
-        RecyclerView rv = view.findViewById(R.id.horizontalRecycle);
-        rv.setAdapter(new sliderAdapter(getContext()));
-        SnapHelper snapHelper = new LinearSnapHelper();
-        snapHelper.attachToRecyclerView(rv);
-        rv.scrollToPosition(10);
-
         return view;
     }
 }
