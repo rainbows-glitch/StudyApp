@@ -58,10 +58,10 @@ public class home extends Fragment {
             for(int i = 0; i < name.length(); i++){
                 if (Character.isWhitespace(name.charAt(i))){
                     name = Character.toUpperCase(name.charAt(0)) + name.substring(1, i);
-                    welcomeName.setText(name);
                     break;
                 }
             }
+            welcomeName.setText(name);
 
             RecyclerView rv = view.findViewById(R.id.horizontalRecycle);
             rv.setAdapter(new sliderAdapter(getContext()));

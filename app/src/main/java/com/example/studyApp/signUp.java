@@ -32,6 +32,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 import java.util.ArrayList;
 import java.util.regex.Pattern;
@@ -43,7 +44,7 @@ public class signUp extends Fragment {
     private TextView oAuthLabel;
     private TextView register1;
     private TextView register2;
-    private EditText emailInput, passwordInput;
+    private EditText emailInput, passwordInput, nameInput;
     private ImageView googleIcon;
 
     private FirebaseAuth mAuth;
@@ -60,6 +61,7 @@ public class signUp extends Fragment {
         loginLayout = view.findViewById(R.id.loginLayout);
         TextView emailLabel = view.findViewById(R.id.emailLabel);
         emailInput = view.findViewById(R.id.emailInput);
+        nameInput = view.findViewById(R.id.nameInput);
         TextView passwordLabel = view.findViewById(R.id.passwordLabel);
         passwordInput = view.findViewById(R.id.passwordInput);
         oAuthLabel = view.findViewById(R.id.oAuthLabel);
@@ -172,7 +174,13 @@ public class signUp extends Fragment {
                                         Log.d("Email Verification:Success", "Email sent.");
                                     }else{Log.d("Email Verification:Failed",task.getException().toString());}
                                 });
-                        NavHostFragment.findNavController(this).navigate(R.id.signUp2Home);
+                        UserProfileChangeRequest updateProfile = new UserProfileChangeRequest.Builder().setDisplayName(nameInput.getText().toString().trim()).build();
+                        mAuth.getCurrentUser().updateProfile(updateProfile)
+                                .addOnCompleteListener(requireActivity(), task1 -> {
+                                    if (task1.isSuccessful()){
+                                        NavHostFragment.findNavController(this).navigate(R.id.signUp2Home);
+                                    }
+                        });
                     } else {
                         // If sign in fails, display a message to the user.
                         Toast.makeText(getContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
@@ -225,7 +233,7 @@ public class signUp extends Fragment {
             } else if (emailValue.length() >= 5) {
                 try { //assuming user inputs ID instead of email
                     for (int i = 0; i < emailValue.length(); i++) {
-                        Integer.parseInt(Character.toString(emailValue.charAt(i))); //try to raise NumberFormatException to check if input is numbers (ensure its a ID)
+                        Integer.parseInt(Character.toString(emailValue.charAt(i))); //try raise NumberFormatException to check if input is numbers (ensure its a ID)
                     }
                     emailValue +="@students.mrgs.school.nz";
                     emailProvided = true;
@@ -244,29 +252,37 @@ public class signUp extends Fragment {
             return;
         }
 
+//        check if name field is not ex
+        boolean nameProvided = false;
+        if (nameInput.getText().toString().trim().length() > 0){
+            nameProvided = true;
+        }else{
+            Toast.makeText(getContext(), "Please enter your name", Toast.LENGTH_LONG).show();
+        }
+
 //        Password validation
-        if(emailProvided) {
+        if(emailProvided && nameProvided) {
             String passwordValue = passwordInput.getText().toString();
             if (passwordValue.length() >= 10) {
-                ArrayList conditionsMet = new ArrayList();
+                int conditionsMet = 0;
                 boolean upperCasePresent = false, lowerCasePresent = false, numberPresent = false, specialCharacterPresent = false;
                 Pattern specialCharacters = Pattern.compile("[^A-Za-z0-9]");
                 for (int i = 0; i < passwordValue.length(); i++) {
                     if (Character.isUpperCase(passwordValue.charAt(i)) && !upperCasePresent) {
-                        conditionsMet.add(true);
+                        conditionsMet++;
                         upperCasePresent = true;
                     } else if (Character.isLowerCase(passwordValue.charAt(i)) && !lowerCasePresent) {
-                        conditionsMet.add(true);
+                        conditionsMet++;
                         lowerCasePresent = true;
                     } else if (Character.isDigit(passwordValue.charAt(i)) && !numberPresent) {
-                        conditionsMet.add(true);
+                        conditionsMet++;
                         numberPresent = true;
                     } else if (specialCharacters.matcher(Character.toString(passwordValue.charAt(i))).matches() && !specialCharacterPresent) {
-                        conditionsMet.add(true);
+                        conditionsMet++;
                         specialCharacterPresent = true;
                     }
                 }
-                if (conditionsMet.size() >= 2) {  //if a minimum of 2 (out of 4) conditions are met
+                if (conditionsMet >= 2) {  //if a minimum of 2 (out of 4) conditions are met
                     Log.d("PW", "Password is Safe");
                     signUpClicked(emailValue, passwordValue);
                 } else {

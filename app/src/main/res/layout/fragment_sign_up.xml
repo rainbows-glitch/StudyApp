@@ -265,7 +265,7 @@
         android:layout_marginEnd="24dp"
         android:autofillHints="password"
         android:hint="Please enter your full name"
-        android:inputType="textPassword"
+        android:inputType="text"
         android:minHeight="48dp"
         android:textColor="?attr/colorOnBackground"
         android:textCursorDrawable="@null"
