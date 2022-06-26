@@ -31,6 +31,47 @@
         app:layout_constraintStart_toStartOf="@+id/welcomeHeader"
         app:layout_constraintTop_toBottomOf="@+id/welcomeHeader" />
 
+    <TextView
+        android:id="@+id/day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/asap_medium"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="Day"
+        android:textColor="?attr/colorOnBackground"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcomeName" />
+
+    <ImageView
+        android:id="@+id/backArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/day"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/day"
+        app:srcCompat="@drawable/ic_arrow_back_ios"
+        app:tint="?attr/colorOnBackground" />
+
+    <ImageView
+        android:id="@+id/frontArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/day"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/day"
+        app:srcCompat="@drawable/ic_arrow_forward_ios"
+        app:tint="?attr/colorOnBackground" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/horizontalRecycle"
         android:layout_width="0dp"
@@ -40,6 +81,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeName" />
+        app:layout_constraintTop_toBottomOf="@+id/day" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

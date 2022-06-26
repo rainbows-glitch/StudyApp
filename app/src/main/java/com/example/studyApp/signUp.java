@@ -124,16 +124,13 @@ public class signUp extends Fragment {
         });
 
         //        show/hide password
-        view.findViewById(R.id.eyeIcon).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(passwordToggle){
-                    passwordInput.setTransformationMethod(null);
-                }else{
-                    passwordInput.setTransformationMethod(new PasswordTransformationMethod());
-                }
-                passwordToggle = !passwordToggle;
+        view.findViewById(R.id.eyeIcon).setOnClickListener(view14 -> {
+            if(passwordToggle){
+                passwordInput.setTransformationMethod(null);
+            }else{
+                passwordInput.setTransformationMethod(new PasswordTransformationMethod());
             }
+            passwordToggle = !passwordToggle;
         });
 
         passwordInput.setOnEditorActionListener((textView, i, keyEvent) -> {
@@ -263,7 +260,7 @@ public class signUp extends Fragment {
 //        Password validation
         if(emailProvided && nameProvided) {
             String passwordValue = passwordInput.getText().toString();
-            if (passwordValue.length() >= 10) {
+            if (passwordValue.length() >= 8) {
                 int conditionsMet = 0;
                 boolean upperCasePresent = false, lowerCasePresent = false, numberPresent = false, specialCharacterPresent = false;
                 Pattern specialCharacters = Pattern.compile("[^A-Za-z0-9]");
