@@ -266,6 +266,7 @@ public class signUp extends Fragment {
                 Pattern specialCharacters = Pattern.compile("[^A-Za-z0-9]");
                 for (int i = 0; i < passwordValue.length(); i++) {
                     if (Character.isUpperCase(passwordValue.charAt(i)) && !upperCasePresent) {
+                        //TODO: Fix this part
                         conditionsMet++;
                         upperCasePresent = true;
                     } else if (Character.isLowerCase(passwordValue.charAt(i)) && !lowerCasePresent) {

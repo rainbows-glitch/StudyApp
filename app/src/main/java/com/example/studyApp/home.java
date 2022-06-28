@@ -11,20 +11,23 @@ import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
+import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.OverScroller;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import org.w3c.dom.Text;
+
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.Calendar;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class home extends Fragment {
 
@@ -76,19 +79,25 @@ public class home extends Fragment {
             LinearLayoutManager parentLayout = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
             rv.setAdapter(parentAdapter);
             rv.setLayoutManager(parentLayout);
+            AtomicInteger adapterPosition = new AtomicInteger();
 
             SnapHelper snapHelper = new LinearSnapHelper();
             snapHelper.attachToRecyclerView(rv);
 
             int today = LocalDateTime.now().getDayOfWeek().getValue() -1;
+            if(today > 4){
+                today = 0;
+            }
             TextView dayName = view.findViewById(R.id.day);
-            rv.scrollToPosition(10 + today);
-            updateDayName(10 + today, dayName);
+            adapterPosition.set(10 + today);
+            rv.scrollToPosition(adapterPosition.get());
+            updateDayName(adapterPosition.get(), dayName);
 
 //            make buttons functional
             view.findViewById(R.id.backArrow).setOnClickListener(view1 -> {
                 if(parentLayout.findFirstVisibleItemPosition() >0){
                     int pos = parentLayout.findFirstVisibleItemPosition() -1;
+                    adapterPosition.set(pos);
                     rv.smoothScrollToPosition(pos);
                     updateDayName(pos, dayName);
                     view.findViewById(R.id.frontArrow).setVisibility(View.VISIBLE);
@@ -103,6 +112,7 @@ public class home extends Fragment {
             view.findViewById(R.id.frontArrow).setOnClickListener(view1 -> {
                 if (parentLayout.findLastVisibleItemPosition() < 24) {
                     int pos = parentLayout.findLastVisibleItemPosition() + 1;
+                    adapterPosition.set(pos);
                     rv.smoothScrollToPosition(pos);
                     updateDayName(pos, dayName);
                     view.findViewById(R.id.backArrow).setVisibility(View.VISIBLE);
@@ -118,18 +128,18 @@ public class home extends Fragment {
             rv.setOnFlingListener(new RecyclerView.OnFlingListener() {
                 @Override
                 public boolean onFling(int velocityX, int velocityY) {
-                    float dist = snapHelper.calculateScrollDistance(velocityX, velocityY)[0];
-                    float holderWidth = displayMetrics.widthPixels;
-                    int n = Math.round(dist/holderWidth);
-                    if(velocityX >0){
-                        int pos = parentLayout.findLastVisibleItemPosition() +n; //we don't need to plus or minus 1 to pos as swiping as already changed pos by 1
-                        updateDayName(pos, dayName);
-                        return false;
-                    }else if(velocityX <0){
-                        int pos = parentLayout.findFirstVisibleItemPosition() +n;
-                        updateDayName(pos, dayName);
-                        return false;
-                    }else {return false;}
+                    Log.d("VelocityX", Integer.toString(velocityX));
+
+                    if(Math.abs(velocityX) >= 10000 && Math.abs(velocityX) < 20000){
+                        new Handler().postDelayed(()->{
+                        onSwipe(parentLayout, dayName, view);
+                        },2000);
+                    }else{
+                        new Handler().postDelayed(()->{
+                            onSwipe(parentLayout, dayName, view);
+                        },3500);
+                    }
+                    return false;
                 }
             });
         }
@@ -142,5 +152,17 @@ public class home extends Fragment {
         dayName = DayOfWeek.of(position%5 +1).toString();
         dayName = dayName.charAt(0) + dayName.substring(1).toLowerCase();
         textView.setText(dayName);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void onSwipe(LinearLayoutManager layout, TextView textView, View view){
+        int pos = layout.findFirstVisibleItemPosition();
+        updateDayName(pos, textView);
+        view.findViewById(R.id.frontArrow).setVisibility(View.VISIBLE);
+        if (pos == 0){
+            view.findViewById(R.id.backArrow).setVisibility(View.GONE);
+        }else if (layout.findLastVisibleItemPosition() == 24) {
+            view.findViewById(R.id.frontArrow).setVisibility(View.GONE);
+        }
     }
 }
