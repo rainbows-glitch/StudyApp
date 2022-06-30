@@ -181,12 +181,12 @@ public class login extends Fragment {
                 .addOnCompleteListener(requireActivity(), task -> {
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
-                        Log.d("SignUp", "createUserWithEmail:success");
+                        Log.d("SignUp", "UserSignInWithEmail:success");
                         NavHostFragment.findNavController(this).navigate(R.id.login2Home);
                     } else {
                         // If sign in fails, display a message to the user.
                         Toast.makeText(getContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                        Log.w("SignUp", "createUserWithEmail:failure", task.getException());
+                        Log.w("SignUp", "UserSignInWithEmail:failure", task.getException());
                     }
                 });
     }

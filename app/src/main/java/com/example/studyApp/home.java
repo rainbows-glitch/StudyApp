@@ -21,12 +21,17 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import org.w3c.dom.Text;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class home extends Fragment {
@@ -74,6 +79,17 @@ public class home extends Fragment {
             welcomeName.setText(name);
 
 
+            DocumentReference docRef = FirebaseFirestore.getInstance().document("users/" + user.getUid());
+
+            //TODO: Dummy Data
+            Map<String, Map> classes = new HashMap<>();
+            classes.put("bio", makeSubject("Biology", "PLR", "S4"));
+            classes.put("phy", makeSubject("Physics", "HEJ", "P5"));
+            classes.put("chem", makeSubject("Chemistry", "DIX", "S6"));
+            docRef.set(classes).addOnSuccessListener(unused -> {
+                Log.d("FIREBASE_FIRESTORE", "Success");
+            }).addOnFailureListener(e -> Log.d("FIREBASE_FIRESTORE", e.getMessage()));
+
             RecyclerView rv = view.findViewById(R.id.horizontalRecycle);
             sliderAdapter parentAdapter = new sliderAdapter(getContext());
             LinearLayoutManager parentLayout = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -85,9 +101,7 @@ public class home extends Fragment {
             snapHelper.attachToRecyclerView(rv);
 
             int today = LocalDateTime.now().getDayOfWeek().getValue() -1;
-            if(today > 4){
-                today = 0;
-            }
+            if(today > 4){today = 0;}
             TextView dayName = view.findViewById(R.id.day);
             adapterPosition.set(10 + today);
             rv.scrollToPosition(adapterPosition.get());
@@ -129,19 +143,22 @@ public class home extends Fragment {
                 @Override
                 public boolean onFling(int velocityX, int velocityY) {
                     Log.d("VelocityX", Integer.toString(velocityX));
+                    String state;
+                    if (velocityX <= 0){
+                        state = "left";
+                    }else{
+                        state = "right";
+                    }
 
                     if(Math.abs(velocityX) >= 10000 && Math.abs(velocityX) < 20000){
-                        new Handler().postDelayed(()->{
-                        onSwipe(parentLayout, dayName, view);
-                        },2000);
+                        new Handler().postDelayed(()-> onSwipe(parentLayout, dayName, view, state),2000);
                     }else{
-                        new Handler().postDelayed(()->{
-                            onSwipe(parentLayout, dayName, view);
-                        },3500);
+                        new Handler().postDelayed(()-> onSwipe(parentLayout, dayName, view, state),3500);
                     }
                     return false;
                 }
             });
+
         }
         return view;
     }
@@ -155,8 +172,13 @@ public class home extends Fragment {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void onSwipe(LinearLayoutManager layout, TextView textView, View view){
-        int pos = layout.findFirstVisibleItemPosition();
+    private void onSwipe(LinearLayoutManager layout, TextView textView, View view, String state){
+        int pos =0;
+        if(Objects.equals(state, "left")){
+            pos = layout.findFirstVisibleItemPosition();
+        }else if (Objects.equals(state, "right")){
+            pos = layout.findLastVisibleItemPosition();
+        }
         updateDayName(pos, textView);
         view.findViewById(R.id.frontArrow).setVisibility(View.VISIBLE);
         if (pos == 0){
@@ -164,5 +186,13 @@ public class home extends Fragment {
         }else if (layout.findLastVisibleItemPosition() == 24) {
             view.findViewById(R.id.frontArrow).setVisibility(View.GONE);
         }
+    }
+
+    private Map<String, String> makeSubject(String subject, String teacher, String room){
+        Map<String,String> returnedMap = new HashMap<>();
+        returnedMap.put("subject", subject);
+        returnedMap.put("teacher", teacher);
+        returnedMap.put("room", room);
+        return returnedMap;
     }
 }

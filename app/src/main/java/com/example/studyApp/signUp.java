@@ -266,11 +266,8 @@ public class signUp extends Fragment {
                 Pattern specialCharacters = Pattern.compile("[^A-Za-z0-9]");
                 for (int i = 0; i < passwordValue.length(); i++) {
                     if (Character.isUpperCase(passwordValue.charAt(i)) && !upperCasePresent) {
-                        //TODO: Fix this part
-                        conditionsMet++;
                         upperCasePresent = true;
                     } else if (Character.isLowerCase(passwordValue.charAt(i)) && !lowerCasePresent) {
-                        conditionsMet++;
                         lowerCasePresent = true;
                     } else if (Character.isDigit(passwordValue.charAt(i)) && !numberPresent) {
                         conditionsMet++;
@@ -279,12 +276,16 @@ public class signUp extends Fragment {
                         conditionsMet++;
                         specialCharacterPresent = true;
                     }
+
+                    if(upperCasePresent && lowerCasePresent){
+                        conditionsMet++;
+                    }
                 }
-                if (conditionsMet >= 2) {  //if a minimum of 2 (out of 4) conditions are met
+                if (conditionsMet >= 2) {  //if a minimum of 2 (out of 3) conditions are met
                     Log.d("PW", "Password is Safe");
                     signUpClicked(emailValue, passwordValue);
                 } else {
-                    Toast.makeText(getContext(), "This password is insecure. Your password must contain at least two of the following: Uppercase Letters, Lowercase letters, Numbers, Special Characters", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "This password is insecure. Your password must contain either numbers and special characters. Your password must also contain uppercase and lowercase letters.", Toast.LENGTH_LONG).show();
                     Log.d("PW", "Insecure password");
                 }
             } else {
