@@ -1,9 +1,7 @@
 package com.example.studyApp;
 
-import android.os.Build;
 import android.os.Bundle;
 
-import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,15 +19,11 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -39,7 +33,6 @@ public class home extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseUser user;
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
@@ -77,18 +70,6 @@ public class home extends Fragment {
                 }
             }
             welcomeName.setText(name);
-
-
-            DocumentReference docRef = FirebaseFirestore.getInstance().document("users/" + user.getUid());
-
-            //TODO: Dummy Data
-            Map<String, Map> classes = new HashMap<>();
-            classes.put("bio", makeSubject("Biology", "PLR", "S4"));
-            classes.put("phy", makeSubject("Physics", "HEJ", "P5"));
-            classes.put("chem", makeSubject("Chemistry", "DIX", "S6"));
-            docRef.set(classes).addOnSuccessListener(unused -> {
-                Log.d("FIREBASE_FIRESTORE", "Success");
-            }).addOnFailureListener(e -> Log.d("FIREBASE_FIRESTORE", e.getMessage()));
 
             RecyclerView rv = view.findViewById(R.id.horizontalRecycle);
             sliderAdapter parentAdapter = new sliderAdapter(getContext());
@@ -163,7 +144,6 @@ public class home extends Fragment {
         return view;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public void updateDayName(int position, TextView textView){
         String dayName;
         dayName = DayOfWeek.of(position%5 +1).toString();
@@ -171,7 +151,6 @@ public class home extends Fragment {
         textView.setText(dayName);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     private void onSwipe(LinearLayoutManager layout, TextView textView, View view, String state){
         int pos =0;
         if(Objects.equals(state, "left")){

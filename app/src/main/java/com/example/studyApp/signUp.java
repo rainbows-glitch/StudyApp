@@ -28,11 +28,15 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.regex.Pattern;
@@ -175,7 +179,7 @@ public class signUp extends Fragment {
                         mAuth.getCurrentUser().updateProfile(updateProfile)
                                 .addOnCompleteListener(requireActivity(), task1 -> {
                                     if (task1.isSuccessful()){
-                                        NavHostFragment.findNavController(this).navigate(R.id.signUp2Home);
+                                        NavHostFragment.findNavController(this).navigate(R.id.signUp2UserInfo);
                                     }
                         });
                     } else {
@@ -207,7 +211,14 @@ public class signUp extends Fragment {
                 mAuth.signInWithCredential(credential)
                         .addOnCompleteListener(task1 -> {
                             if (task.isSuccessful()) {
-                                NavHostFragment.findNavController(this).navigate(R.id.signUp2Home);
+                                DocumentReference docRef = FirebaseFirestore.getInstance().document("users/" + FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                docRef.get().addOnSuccessListener(documentSnapshot -> {
+                                    if (documentSnapshot.exists()){
+                                        NavHostFragment.findNavController(this).navigate(R.id.signUp2Home);
+                                    }else{ //new account created
+                                        NavHostFragment.findNavController(this).navigate(R.id.signUp2UserInfo);
+                                    }
+                                });
                                 Log.d("login", "Logged In");
                             } else {
                                 Toast.makeText(getContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
@@ -276,12 +287,8 @@ public class signUp extends Fragment {
                         conditionsMet++;
                         specialCharacterPresent = true;
                     }
-
-                    if(upperCasePresent && lowerCasePresent){
-                        conditionsMet++;
-                    }
                 }
-                if (conditionsMet >= 2) {  //if a minimum of 2 (out of 3) conditions are met
+                if(upperCasePresent && lowerCasePresent && conditionsMet >= 1) {  //if a minimum of 2 (out of 3) conditions are met
                     Log.d("PW", "Password is Safe");
                     signUpClicked(emailValue, passwordValue);
                 } else {

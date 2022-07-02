@@ -34,6 +34,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class login extends Fragment {
 //    declare
@@ -153,16 +155,13 @@ public class login extends Fragment {
         });
 
 //        show/hide password
-        view.findViewById(R.id.eyeIcon).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(passwordToggle){
-                    passwordInput.setTransformationMethod(null);
-                }else{
-                    passwordInput.setTransformationMethod(new PasswordTransformationMethod());
-                }
-                passwordToggle = !passwordToggle;
+        view.findViewById(R.id.eyeIcon).setOnClickListener(view15 -> {
+            if(passwordToggle){
+                passwordInput.setTransformationMethod(null);
+            }else{
+                passwordInput.setTransformationMethod(new PasswordTransformationMethod());
             }
+            passwordToggle = !passwordToggle;
         });
 
         options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -212,7 +211,14 @@ public class login extends Fragment {
                 mAuth.signInWithCredential(credential)
                         .addOnCompleteListener(task1 -> {
                             if (task.isSuccessful()) {
-                                NavHostFragment.findNavController(this).navigate(R.id.login2Home);
+                                DocumentReference docRef = FirebaseFirestore.getInstance().document("users/" + FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                docRef.get().addOnSuccessListener(documentSnapshot -> {
+                                    if (documentSnapshot.exists()){
+                                        NavHostFragment.findNavController(this).navigate(R.id.login2Home);
+                                    }else{ //new account created
+                                        NavHostFragment.findNavController(this).navigate(R.id.login2UserInfo);
+                                    }
+                                });
                                 Log.d("login", "Logged In");
                             } else {
                                 Toast.makeText(getContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
