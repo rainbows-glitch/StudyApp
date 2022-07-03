@@ -19,11 +19,11 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -71,10 +71,36 @@ public class home extends Fragment {
             }
             welcomeName.setText(name);
 
+//          retrieve data from cloud firestore
+            FirebaseFirestore.getInstance().collection("users")
+                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .collection("userInformation")
+                    .document("classes").get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.exists()){
+
+                            final Map<String, Object> classes = documentSnapshot.getData();
+                            FirebaseFirestore.getInstance().collection("users")
+                                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .collection("userInformation")
+                                    .document("timetable").get()
+                                    .addOnSuccessListener(documentSnapshot1 -> {
+
+                                        if (documentSnapshot1.exists()){
+                                            Map<String, Object> timetable = documentSnapshot1.getData();
+                                            Log.d("TIMETABLE", timetable.toString());
+                                            sliderAdapter parentAdapter = new sliderAdapter(getContext(), classes, timetable);
+                                            RecyclerView rv = view.findViewById(R.id.horizontalRecycle);
+                                            rv.setAdapter(parentAdapter);
+
+                                        }else{NavHostFragment.findNavController(this).navigate(R.id.globalUserInfo);}
+                                    });
+                        }else{NavHostFragment.findNavController(this).navigate(R.id.globalUserInfo);}
+                    })
+                    .addOnFailureListener(e -> Log.d("FIREBASE_FIRESTORE", e.getMessage()));
+
             RecyclerView rv = view.findViewById(R.id.horizontalRecycle);
-            sliderAdapter parentAdapter = new sliderAdapter(getContext());
             LinearLayoutManager parentLayout = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-            rv.setAdapter(parentAdapter);
             rv.setLayoutManager(parentLayout);
             AtomicInteger adapterPosition = new AtomicInteger();
 
@@ -165,13 +191,5 @@ public class home extends Fragment {
         }else if (layout.findLastVisibleItemPosition() == 24) {
             view.findViewById(R.id.frontArrow).setVisibility(View.GONE);
         }
-    }
-
-    private Map<String, String> makeSubject(String subject, String teacher, String room){
-        Map<String,String> returnedMap = new HashMap<>();
-        returnedMap.put("subject", subject);
-        returnedMap.put("teacher", teacher);
-        returnedMap.put("room", room);
-        return returnedMap;
     }
 }
