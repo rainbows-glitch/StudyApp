@@ -211,14 +211,17 @@ public class signUp extends Fragment {
                 mAuth.signInWithCredential(credential)
                         .addOnCompleteListener(task1 -> {
                             if (task.isSuccessful()) {
-                                DocumentReference docRef = FirebaseFirestore.getInstance().document("users/" + FirebaseAuth.getInstance().getCurrentUser().getUid());
-                                docRef.get().addOnSuccessListener(documentSnapshot -> {
-                                    if (documentSnapshot.exists()){
-                                        NavHostFragment.findNavController(this).navigate(R.id.signUp2Home);
-                                    }else{ //new account created
-                                        NavHostFragment.findNavController(this).navigate(R.id.signUp2UserInfo);
-                                    }
-                                });
+                                FirebaseFirestore.getInstance().collection("users")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .collection("userInformation")
+                                        .document("classes")
+                                        .get().addOnSuccessListener(documentSnapshot -> {
+                                            if (documentSnapshot.exists()){
+                                                NavHostFragment.findNavController(this).navigate(R.id.globalNavHome);
+                                            }else{ //new account created
+                                                NavHostFragment.findNavController(this).navigate(R.id.signUp2UserInfo);
+                                            }
+                                        });
                                 Log.d("login", "Logged In");
                             } else {
                                 Toast.makeText(getContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();

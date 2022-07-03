@@ -180,8 +180,17 @@ public class login extends Fragment {
                 .addOnCompleteListener(requireActivity(), task -> {
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
-                        Log.d("SignUp", "UserSignInWithEmail:success");
-                        NavHostFragment.findNavController(this).navigate(R.id.login2Home);
+                        FirebaseFirestore.getInstance().collection("users")
+                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                .collection("userInformation")
+                                .document("classes")
+                                .get().addOnSuccessListener(documentSnapshot -> {
+                                    if (documentSnapshot.exists()){
+                                        NavHostFragment.findNavController(this).navigate(R.id.globalNavHome);
+                                    }else{ //new account created
+                                        NavHostFragment.findNavController(this).navigate(R.id.login2UserInfo);
+                                    }
+                                });
                     } else {
                         // If sign in fails, display a message to the user.
                         Toast.makeText(getContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
@@ -211,10 +220,13 @@ public class login extends Fragment {
                 mAuth.signInWithCredential(credential)
                         .addOnCompleteListener(task1 -> {
                             if (task.isSuccessful()) {
-                                DocumentReference docRef = FirebaseFirestore.getInstance().document("users/" + FirebaseAuth.getInstance().getCurrentUser().getUid());
-                                docRef.get().addOnSuccessListener(documentSnapshot -> {
+                                FirebaseFirestore.getInstance().collection("users")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .collection("userInformation")
+                                        .document("classes")
+                                        .get().addOnSuccessListener(documentSnapshot -> {
                                     if (documentSnapshot.exists()){
-                                        NavHostFragment.findNavController(this).navigate(R.id.login2Home);
+                                        NavHostFragment.findNavController(this).navigate(R.id.globalNavHome);
                                     }else{ //new account created
                                         NavHostFragment.findNavController(this).navigate(R.id.login2UserInfo);
                                     }
