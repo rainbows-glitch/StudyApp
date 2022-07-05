@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolBar;
     private NavController mNavController;
     private AppBarConfiguration mAppBarConfiguration;
-    private ImageView foreWave;
+    private ImageView foreWave, purpleBlob, blueBlob;
     private Guideline alphaGuide;
 
     @Override
@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         assert navHost != null;
         mNavController = navHost.getNavController();
         NavigationView drawer = findViewById(R.id.drawer);
+        purpleBlob = findViewById(R.id.purpleBlob);
+        blueBlob = findViewById(R.id.blueBlob);
 
 //        tells system to use toolbar as app bar
         setSupportActionBar(toolBar);
@@ -100,4 +102,16 @@ public class MainActivity extends AppCompatActivity {
             Log.d("ToolBar", "shown via showNavigation()");
         }
     }
+
+//   Adjust blobs
+    public void defaultBackgroundSettings(){
+        purpleBlob.setAlpha(1f);
+        blueBlob.setAlpha(0.68f);
+
+    }
+    public void onStudyStart(){
+        purpleBlob.setAlpha(0.4f);
+        blueBlob.setAlpha(0.4f);       //TODO: need to adjust margins
+    }
+
 }

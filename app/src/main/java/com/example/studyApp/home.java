@@ -2,6 +2,7 @@ package com.example.studyApp;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,12 +18,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Map;
 import java.util.Objects;
@@ -36,6 +43,7 @@ public class home extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        ((MainActivity)requireActivity()).defaultBackgroundSettings();
 
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
@@ -71,15 +79,15 @@ public class home extends Fragment {
             }
             welcomeName.setText(name);
 
-//          retrieve data from cloud firestore
+//          retrieve data from cloud firestore TODO: could be more efficient. Consider queries
             FirebaseFirestore.getInstance().collection("users")
                     .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                     .collection("userInformation")
                     .document("classes").get()
                     .addOnSuccessListener(documentSnapshot -> {
                         if (documentSnapshot.exists()){
-
                             final Map<String, Object> classes = documentSnapshot.getData();
+
                             FirebaseFirestore.getInstance().collection("users")
                                     .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .collection("userInformation")
@@ -93,9 +101,9 @@ public class home extends Fragment {
                                             RecyclerView rv = view.findViewById(R.id.horizontalRecycle);
                                             rv.setAdapter(parentAdapter);
 
-                                        }else{NavHostFragment.findNavController(this).navigate(R.id.globalUserInfo);}
+                                        }else{NavHostFragment.findNavController(this).navigate(R.id.home2UserInfo);}
                                     });
-                        }else{NavHostFragment.findNavController(this).navigate(R.id.globalUserInfo);}
+                        }else{NavHostFragment.findNavController(this).navigate(R.id.home2UserInfo);}//TODO
                     })
                     .addOnFailureListener(e -> Log.d("FIREBASE_FIRESTORE", e.getMessage()));
 

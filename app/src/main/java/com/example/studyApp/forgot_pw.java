@@ -127,5 +127,4 @@ public class forgot_pw extends Fragment {
         return cm.getActiveNetworkInfo() != null &&
                 cm.getActiveNetworkInfo().isConnectedOrConnecting();
     }
-
 }

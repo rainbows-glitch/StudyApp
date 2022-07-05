@@ -66,6 +66,7 @@ public class login extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
+        ((MainActivity)requireActivity()).defaultBackgroundSettings();
 
 //        initialise
         glass = view.findViewById(R.id.glass);
