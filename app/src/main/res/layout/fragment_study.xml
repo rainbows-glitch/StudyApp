@@ -58,7 +58,7 @@
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:text="Request a Counselor"
-        android:textColor="?attr/colorOnBackground"
+        android:textColor="#FFFFFFFF"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/gradientM1"
         app:layout_constraintHorizontal_bias="0.26"
@@ -104,11 +104,34 @@
         android:paddingEnd="16dp"
         android:text="Request an Academic Mentor"
         android:textAlignment="textEnd"
-        android:textColor="?attr/colorOnBackground"
+        android:textColor="#FFFFFFFF"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/gradientM2"
         app:layout_constraintEnd_toEndOf="@+id/gradientM2"
         app:layout_constraintHorizontal_bias="0.74"
         app:layout_constraintStart_toStartOf="@+id/gradientM2" />
+
+    <TextView
+        android:id="@+id/hwLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/quicksand_semibold"
+        android:text="Homework Centres:"
+        android:textColor="?attr/colorOnBackground"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="@id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/gradientM1" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/studyRV"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hwLabel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

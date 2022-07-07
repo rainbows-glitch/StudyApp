@@ -41,13 +41,13 @@ public class forgot_pw extends Fragment {
         backArrowLabel = view.findViewById(R.id.backLabel);
         EditText email = view.findViewById(R.id.emailInput);
 
-        ((MainActivity) getActivity()).hideNavigation();
+        ((MainActivity) requireActivity()).hideNavigation();
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
-        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        requireActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
 //        set glass height to be 85% of window height
-        float vh = displayMetrics.heightPixels / 100;
+        float vh = displayMetrics.heightPixels / 100f;
         glass.getLayoutParams().height = (int) vh * 85;
 
         ConstraintSet mConstraintSet = new ConstraintSet();
@@ -70,9 +70,7 @@ public class forgot_pw extends Fragment {
         backArrowLabel.setOnClickListener(view1 -> NavHostFragment.findNavController(this).navigate(R.id.forgotPW2Login));
         backArrow.setOnClickListener(view1 -> NavHostFragment.findNavController(this).navigate(R.id.forgotPW2Login));
 
-        view.findViewById(R.id.forgotLabel).setOnClickListener(view13 -> {
-           email.requestFocus();
-        });
+        view.findViewById(R.id.forgotLabel).setOnClickListener(view13 -> email.requestFocus());
 
         //reset password (via email)
         view.findViewById(R.id.continueButton).setOnClickListener(view12 -> {
@@ -111,7 +109,7 @@ public class forgot_pw extends Fragment {
                             Log.d("ForgotPW", "Password Reset sent.");
                             NavHostFragment.findNavController(this).navigate(R.id.forgotPW2Login);
                         } else {
-                            Toast.makeText(getContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(requireContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
                             Log.d("ForgotPassword",task.getException().getMessage());
                         }
                     });

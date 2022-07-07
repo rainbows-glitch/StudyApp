@@ -18,5 +18,6 @@
 
         <item name="colorTertiary">@color/glassMorphismLightFill</item>
         <item name="colorTertiaryContainer">@color/white</item>
+        <item name="colorOnTertiary">@color/darkPurple</item>
     </style>
 </resources>

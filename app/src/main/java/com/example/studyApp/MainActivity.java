@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void onStudyStart(){
         purpleBlob.setAlpha(0.4f);
-        blueBlob.setAlpha(0.4f);       //TODO: need to adjust margins
+        blueBlob.setAlpha(0.4f);
     }
 
 }

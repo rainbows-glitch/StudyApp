@@ -12,7 +12,6 @@ import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -34,20 +33,20 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class login extends Fragment {
 //    declare
     private View glass;
     private ConstraintLayout loginLayout;
-    private TextView emailLabel, passwordLabel, oAuthLabel, register1, register2;
+    private TextView oAuthLabel;
+    private TextView register1;
+    private TextView register2;
     private EditText emailInput, passwordInput;
     private ImageView googleIcon;
 
     private FirebaseAuth mAuth;
     private GoogleSignInClient client;
-    private GoogleSignInOptions options;
     private boolean passwordToggle = true;
 
     @Override
@@ -71,9 +70,9 @@ public class login extends Fragment {
 //        initialise
         glass = view.findViewById(R.id.glass);
         loginLayout = view.findViewById(R.id.loginLayout);
-        emailLabel = view.findViewById(R.id.emailLabel);
+        TextView emailLabel = view.findViewById(R.id.emailLabel);
         emailInput = view.findViewById(R.id.emailInput);
-        passwordLabel = view.findViewById(R.id.passwordLabel);
+        TextView passwordLabel = view.findViewById(R.id.passwordLabel);
         passwordInput = view.findViewById(R.id.passwordInput);
         oAuthLabel = view.findViewById(R.id.oAuthLabel);
         googleIcon = view.findViewById(R.id.googleIcon);
@@ -88,7 +87,7 @@ public class login extends Fragment {
         requireActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
 //        set glass height to be 85% of window height
-        float vh = displayMetrics.heightPixels/100;
+        float vh = displayMetrics.heightPixels/100f;
         glass.getLayoutParams().height = (int) vh*85;
 
         ConstraintSet mConstraintSet = new ConstraintSet();
@@ -165,7 +164,7 @@ public class login extends Fragment {
             passwordToggle = !passwordToggle;
         });
 
-        options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken("332292739647-j5dvfu77t9ecudtj6r8kkk35rhbo0lqb.apps.googleusercontent.com")
                 .requestEmail()
                 .build();

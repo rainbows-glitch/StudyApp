@@ -17,5 +17,6 @@
 
         <item name="colorTertiary">@color/glassMorphismDarkFill</item>
         <item name="colorTertiaryContainer">@color/gOAuthDark</item>
+        <item name="colorOnTertiary">@color/blue</item>
     </style>
 </resources>
