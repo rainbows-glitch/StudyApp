@@ -24,10 +24,10 @@ public class study extends Fragment {
         ((MainActivity)requireActivity()).onStudyStart();
 
         view.findViewById(R.id.gradientM1).setOnClickListener(view1 -> {
-            NavHostFragment.findNavController(this).navigate(studyDirections.study2Request("counsellor"));
+            NavHostFragment.findNavController(this).navigate(R.id.study2Counselor);
         });
         view.findViewById(R.id.gradientM2).setOnClickListener(view1 -> {
-            NavHostFragment.findNavController(this).navigate(studyDirections.study2Request("mentor"));
+            NavHostFragment.findNavController(this).navigate(R.id.study2Request);
         });
 
         FirebaseFirestore.getInstance().collection("other").document("homeworkCentres").get()
@@ -39,7 +39,7 @@ public class study extends Fragment {
                         rv.setAdapter(new homeworkCentreAdapter(requireContext(), data));
                         LinearLayoutManager parentLayout = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
                         rv.setLayoutManager(parentLayout);
-                    }else{
+                    }else{ //error handling
                         Toast.makeText(requireContext(), "Something went wrong. Please try again later.", Toast.LENGTH_LONG).show();}
                 }).addOnFailureListener(e -> {
                     Toast.makeText(requireContext(), "Something went wrong. Please try again later.", Toast.LENGTH_LONG).show();

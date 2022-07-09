@@ -25,6 +25,8 @@
         android:id="@+id/glass"
         android:layout_width="0dp"
         android:layout_height="648dp"
+        android:layout_marginStart="-5dp"
+        android:layout_marginBottom="-5dp"
         android:alpha=".58"
         android:background="@drawable/glass_morphism"
         android:contentDescription="@string/content_description"
@@ -40,7 +42,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
         android:fontFamily="@font/quicksand_semibold"
-        android:text="Label"
+        android:text="Request an Academic Mentor"
         android:textColor="?attr/colorOnBackground"
         android:textSize="22sp"
         app:layout_constraintEnd_toStartOf="@+id/glassRight"
@@ -63,21 +65,23 @@
         android:id="@+id/idInput"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@+id/glass"
-        app:layout_constraintEnd_toEndOf="@+id/glass"
-        app:layout_constraintTop_toBottomOf="@+id/idLabel"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginStart="24dp"
-        android:textColor="?attr/colorOnBackground"
         android:fontFamily="@font/asap_medium"
-        android:textSize="16sp"/>
+        android:hint="Enter your Student ID"
+        android:textColor="?attr/colorOnBackground"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/glass"
+        app:layout_constraintStart_toStartOf="@+id/glass"
+        app:layout_constraintTop_toBottomOf="@+id/idLabel" />
 
     <TextView
         android:id="@+id/helpLabel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:fontFamily="@font/asap_semibold"
         android:text="What subject would you like help with?"
         android:textColor="?attr/colorOnBackground"
@@ -92,7 +96,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/asap_medium"
-        android:hint="Eg. Math"
+        android:hint="Enter the subject you'd like help with (Eg. Math)."
         android:textColor="?attr/colorOnBackground"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/idInput"
@@ -101,15 +105,16 @@
 
     <TextView
         android:id="@+id/levelLabel"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Level:"
-        app:layout_constraintTop_toBottomOf="@+id/helpInput"
-        app:layout_constraintStart_toStartOf="@+id/helpLabel"
         android:layout_marginTop="16dp"
-        android:textColor="?attr/colorOnBackground"
         android:fontFamily="@font/asap_semibold"
-        android:textSize="18sp" />
+        android:text="Enter the Subject level you'd like help with:"
+        android:textColor="?attr/colorOnBackground"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/helpLabel"
+        app:layout_constraintStart_toStartOf="@+id/helpLabel"
+        app:layout_constraintTop_toBottomOf="@+id/helpInput" />
 
     <EditText
         android:id="@+id/levelInput"
@@ -121,7 +126,7 @@
         android:textColor="?attr/colorOnBackground"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/helpInput"
-        app:layout_constraintStart_toStartOf="@+id/helpInput"
+        app:layout_constraintStart_toStartOf="@+id/levelLabel"
         app:layout_constraintTop_toBottomOf="@+id/levelLabel" />
 
     <android.widget.Button
@@ -137,7 +142,7 @@
         android:textAllCaps="false"
         android:textColor="#FFFFFFFF"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/glass"
         app:layout_constraintEnd_toStartOf="@+id/glassRight"
         app:layout_constraintStart_toStartOf="@+id/glassLeft"
         app:layout_constraintTop_toBottomOf="@+id/levelInput" />
