@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/infoLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".login">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glassLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.08" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glassRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.92" />
+
+    <View
+        android:id="@+id/glass"
+        android:layout_width="0dp"
+        android:layout_height="648dp"
+        android:alpha=".58"
+        android:background="@drawable/glass_morphism"
+        android:contentDescription="@string/content_description"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/glassRight"
+        app:layout_constraintStart_toStartOf="@id/glassLeft" />
+
+    <ScrollView
+        android:id="@+id/infoScroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/glass"
+        app:layout_constraintEnd_toEndOf="@id/glassRight"
+        app:layout_constraintStart_toStartOf="@+id/glassLeft"
+        app:layout_constraintTop_toTopOf="@+id/glass">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/scrollConstraint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp">
+
+            <TextView
+                android:id="@+id/infoTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/quicksand_semibold"
+                android:text="Almost There!"
+                android:textColor="?attr/colorOnBackground"
+                android:textSize="26sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/infoSubheader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/asap_medium"
+                android:text="Please enter your timetable"
+                android:textColor="?attr/colorOnBackground"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/infoTitle"
+                app:layout_constraintTop_toBottomOf="@+id/infoTitle" />
+
+            <TextView
+                android:id="@+id/infoDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/asap_semibold"
+                android:text="Monday"
+                android:textColor="?attr/colorOnBackground"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/infoSubheader" />
+
+            <TextView
+                android:id="@+id/period1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/asap_semibold"
+                android:text="Period 1:"
+                android:textColor="?attr/colorOnBackground"
+                app:layout_constraintStart_toStartOf="@+id/infoTitle"
+                app:layout_constraintTop_toBottomOf="@+id/infoDay" />
+
+            <TextView
+                android:id="@+id/P1SubjectLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/asap_medium"
+                android:text="Subject"
+                android:textColor="?attr/colorOnBackground"
+                app:layout_constraintStart_toStartOf="@+id/period1"
+                app:layout_constraintTop_toBottomOf="@+id/period1" />
+
+            <AutoCompleteTextView
+                android:id="@+id/P1SubjectInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:completionThreshold="0"
+                android:hint="Enter your Subject"
+                android:minHeight="48dp"
+                android:textColor="?attr/colorOnBackground"
+                android:textCursorDrawable="@null"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/P1SubjectLabel" />
+
+            <TextView
+                android:id="@+id/P1TeacherLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/asap_medium"
+                android:text="Teacher"
+                android:textColor="?attr/colorOnBackground"
+                app:layout_constraintStart_toStartOf="@+id/P1SubjectInput"
+                app:layout_constraintTop_toBottomOf="@+id/P1SubjectInput" />
+
+            <EditText
+                android:id="@+id/P1TeacherInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="4dp"
+                android:hint="Teacher Code"
+                android:minHeight="48dp"
+                android:textColor="?attr/colorOnBackground"
+                android:textCursorDrawable="@null"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@id/P1ClassInput"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/P1TeacherLabel" />
+
+            <TextView
+                android:id="@+id/P1ClassLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/asap_medium"
+                android:text="Room"
+                android:textColor="?attr/colorOnBackground"
+                app:layout_constraintBaseline_toBaselineOf="@+id/P1TeacherLabel"
+                app:layout_constraintStart_toStartOf="@+id/P1ClassInput" />
+
+            <EditText
+                android:id="@+id/P1ClassInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="24dp"
+                android:hint="Classroom"
+                android:minHeight="48dp"
+                android:textColor="?attr/colorOnBackground"
+                android:textCursorDrawable="@null"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/P1TeacherInput"
+                app:layout_constraintTop_toBottomOf="@id/P1ClassLabel" />
+
+
+            <TextView
+                android:id="@+id/period2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/asap_semibold"
+                android:text="Period 2:"
+                android:textColor="?attr/colorOnBackground"
+                app:layout_constraintStart_toStartOf="@+id/infoTitle"
+                app:layout_constraintTop_toBottomOf="@+id/P1TeacherInput" />
+
+            <TextView
+                android:id="@+id/P2SubjectLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/asap_medium"
+                android:text="Subject"
+                android:textColor="?attr/colorOnBackground"
+                app:layout_constraintStart_toStartOf="@+id/period2"
+                app:layout_constraintTop_toBottomOf="@+id/period2" />
+
+            <AutoCompleteTextView
+                android:id="@+id/P2SubjectInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:completionThreshold="0"
+                android:hint="Enter your Subject"
+                android:minHeight="48dp"
+                android:textColor="?attr/colorOnBackground"
+                android:textCursorDrawable="@null"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/P2SubjectLabel" />
+
+            <TextView
+                android:id="@+id/P2TeacherLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/asap_medium"
+                android:text="Teacher"
+                android:textColor="?attr/colorOnBackground"
+                app:layout_constraintStart_toStartOf="@+id/P2SubjectInput"
+                app:layout_constraintTop_toBottomOf="@+id/P2SubjectInput" />
+
+            <EditText
+                android:id="@+id/P2TeacherInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="4dp"
+                android:hint="Teacher Code"
+                android:minHeight="48dp"
+                android:textColor="?attr/colorOnBackground"
+                android:textCursorDrawable="@null"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@id/P2ClassInput"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/P2TeacherLabel" />
+
+            <TextView
+                android:id="@+id/P2ClassLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/asap_medium"
+                android:text="Room"
+                android:textColor="?attr/colorOnBackground"
+                app:layout_constraintBaseline_toBaselineOf="@+id/P2TeacherLabel"
+                app:layout_constraintStart_toStartOf="@+id/P2ClassInput" />
+
+            <EditText
+                android:id="@+id/P2ClassInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="24dp"
+                android:hint="Classroom"
+                android:minHeight="48dp"
+                android:textColor="?attr/colorOnBackground"
+                android:textCursorDrawable="@null"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/P2TeacherInput"
+                app:layout_constraintTop_toBottomOf="@id/P2ClassLabel" />
+
+
+            <TextView
+                android:id="@+id/period3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/asap_semibold"
+                android:text="Period 3:"
+                android:textColor="?attr/colorOnBackground"
+                app:layout_constraintStart_toStartOf="@+id/P2TeacherLabel"
+                app:layout_constraintTop_toBottomOf="@+id/P2TeacherInput" />
+
+            <TextView
+                android:id="@+id/P3SubjectLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/asap_medium"
+                android:text="Subject"
+                android:textColor="?attr/colorOnBackground"
+                app:layout_constraintStart_toStartOf="@+id/period3"
+                app:layout_constraintTop_toBottomOf="@+id/period3" />
+
+            <AutoCompleteTextView
+                android:id="@+id/P3SubjectInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:completionThreshold="0"
+                android:hint="Enter your Subject"
+                android:minHeight="48dp"
+                android:textColor="?attr/colorOnBackground"
+                android:textCursorDrawable="@null"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/P3SubjectLabel" />
+
+            <TextView
+                android:id="@+id/P3TeacherLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/asap_medium"
+                android:text="Teacher"
+                android:textColor="?attr/colorOnBackground"
+                app:layout_constraintStart_toStartOf="@+id/P3SubjectInput"
+                app:layout_constraintTop_toBottomOf="@+id/P3SubjectInput" />
+
+            <EditText
+                android:id="@+id/P3TeacherInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="4dp"
+                android:hint="Teacher Code"
+                android:minHeight="48dp"
+                android:textColor="?attr/colorOnBackground"
+                android:textCursorDrawable="@null"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@id/P3ClassInput"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/P3TeacherLabel" />
+
+            <TextView
+                android:id="@+id/P3ClassLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/asap_medium"
+                android:text="Room"
+                android:textColor="?attr/colorOnBackground"
+                app:layout_constraintBaseline_toBaselineOf="@+id/P3TeacherLabel"
+                app:layout_constraintStart_toStartOf="@+id/P3ClassInput" />
+
+            <EditText
+                android:id="@+id/P3ClassInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="24dp"
+                android:hint="Classroom"
+                android:minHeight="48dp"
+                android:textColor="?attr/colorOnBackground"
+                android:textCursorDrawable="@null"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/P3TeacherInput"
+                app:layout_constraintTop_toBottomOf="@id/P3ClassLabel" />
+
+            <TextView
+                android:id="@+id/period4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/asap_semibold"
+                android:text="Period 4:"
+                android:textColor="?attr/colorOnBackground"
+                app:layout_constraintStart_toStartOf="@+id/infoTitle"
+                app:layout_constraintTop_toBottomOf="@+id/P3TeacherInput" />
+
+            <TextView
+                android:id="@+id/P4SubjectLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/asap_medium"
+                android:text="Subject"
+                android:textColor="?attr/colorOnBackground"
+                app:layout_constraintStart_toStartOf="@+id/period4"
+                app:layout_constraintTop_toBottomOf="@+id/period4" />
+
+            <AutoCompleteTextView
+                android:id="@+id/P4SubjectInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:completionThreshold="0"
+                android:hint="Enter your Subject"
+                android:minHeight="48dp"
+                android:textColor="?attr/colorOnBackground"
+                android:textCursorDrawable="@null"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/P4SubjectLabel" />
+
+            <TextView
+                android:id="@+id/P4TeacherLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/asap_medium"
+                android:text="Teacher"
+                android:textColor="?attr/colorOnBackground"
+                app:layout_constraintStart_toStartOf="@+id/P4SubjectInput"
+                app:layout_constraintTop_toBottomOf="@+id/P4SubjectInput" />
+
+            <EditText
+                android:id="@+id/P4TeacherInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="4dp"
+                android:hint="Teacher Code"
+                android:minHeight="48dp"
+                android:textColor="?attr/colorOnBackground"
+                android:textCursorDrawable="@null"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@id/P4ClassInput"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/P4TeacherLabel" />
+
+            <TextView
+                android:id="@+id/P4ClassLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/asap_medium"
+                android:text="Room"
+                android:textColor="?attr/colorOnBackground"
+                app:layout_constraintBaseline_toBaselineOf="@+id/P4TeacherLabel"
+                app:layout_constraintStart_toStartOf="@+id/P4ClassInput" />
+
+            <EditText
+                android:id="@+id/P4ClassInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="24dp"
+                android:hint="Classroom"
+                android:minHeight="48dp"
+                android:textColor="?attr/colorOnBackground"
+                android:textCursorDrawable="@null"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/P4TeacherInput"
+                app:layout_constraintTop_toBottomOf="@id/P4ClassLabel" />
+
+            <TextView
+                android:id="@+id/period5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/asap_semibold"
+                android:text="Period 5:"
+                android:textColor="?attr/colorOnBackground"
+                app:layout_constraintStart_toStartOf="@+id/P4TeacherInput"
+                app:layout_constraintTop_toBottomOf="@+id/P4ClassInput" />
+
+            <TextView
+                android:id="@+id/P5SubjectLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/asap_medium"
+                android:text="Subject"
+                android:textColor="?attr/colorOnBackground"
+                app:layout_constraintStart_toStartOf="@+id/period5"
+                app:layout_constraintTop_toBottomOf="@+id/period5" />
+
+            <AutoCompleteTextView
+                android:id="@+id/P5SubjectInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:completionThreshold="0"
+                android:hint="Enter your Subject"
+                android:minHeight="48dp"
+                android:textColor="?attr/colorOnBackground"
+                android:textCursorDrawable="@null"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/P5SubjectLabel" />
+
+            <TextView
+                android:id="@+id/P5TeacherLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/asap_medium"
+                android:text="Teacher"
+                android:textColor="?attr/colorOnBackground"
+                app:layout_constraintStart_toStartOf="@+id/P5SubjectInput"
+                app:layout_constraintTop_toBottomOf="@+id/P5SubjectInput" />
+
+            <EditText
+                android:id="@+id/P5TeacherInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="4dp"
+                android:hint="Teacher Code"
+                android:minHeight="48dp"
+                android:textColor="?attr/colorOnBackground"
+                android:textCursorDrawable="@null"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@id/P5ClassInput"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/P5TeacherLabel" />
+
+            <TextView
+                android:id="@+id/P5ClassLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/asap_medium"
+                android:text="Room"
+                android:textColor="?attr/colorOnBackground"
+                app:layout_constraintBaseline_toBaselineOf="@+id/P5TeacherLabel"
+                app:layout_constraintStart_toStartOf="@+id/P3ClassInput" />
+
+            <EditText
+                android:id="@+id/P5ClassInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="24dp"
+                android:hint="Classroom"
+                android:imeOptions="actionDone"
+                android:minHeight="48dp"
+                android:textColor="?attr/colorOnBackground"
+                android:textCursorDrawable="@null"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/P5TeacherInput"
+                app:layout_constraintTop_toBottomOf="@id/P5ClassLabel" />
+
+            <android.widget.Button
+                android:id="@+id/nextBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-3dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/continue_btn"
+                android:elevation="100dp"
+                android:fontFamily="@font/quicksand_semibold"
+                android:paddingStart="70dp"
+                android:paddingEnd="70dp"
+                android:paddingBottom="6dp"
+                android:text="Next"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/P5ClassInput" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/counselorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".counselor">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glassLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.08" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glassRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.92" />
+
+    <View
+        android:id="@+id/glass"
+        android:layout_width="0dp"
+        android:layout_height="648dp"
+        android:layout_marginStart="-5dp"
+        android:layout_marginBottom="-5dp"
+        android:alpha=".58"
+        android:background="@drawable/glass_morphism"
+        android:contentDescription="@string/content_description"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/glassRight"
+        app:layout_constraintStart_toStartOf="@id/glassLeft" />
+
+    <TextView
+        android:id="@+id/requestLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/quicksand_semibold"
+        android:text="Request an Academic Mentor"
+        android:textColor="?attr/colorOnBackground"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toStartOf="@+id/glassRight"
+        app:layout_constraintStart_toStartOf="@+id/glass"
+        app:layout_constraintTop_toTopOf="@+id/glass" />
+
+    <TextView
+        android:id="@+id/idLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:fontFamily="@font/asap_semibold"
+        android:text="Student ID:"
+        android:textColor="?attr/colorOnBackground"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/requestLabel"
+        app:layout_constraintTop_toBottomOf="@+id/requestLabel" />
+
+    <EditText
+        android:id="@+id/idInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/asap_medium"
+        android:hint="Enter your Student ID"
+        android:textColor="?attr/colorOnBackground"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/glass"
+        app:layout_constraintStart_toStartOf="@+id/glass"
+        app:layout_constraintTop_toBottomOf="@+id/idLabel" />
+
+    <TextView
+        android:id="@+id/yrLvlLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:fontFamily="@font/asap_semibold"
+        android:text="Year Level"
+        android:textColor="?attr/colorOnBackground"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/requestLabel"
+        app:layout_constraintStart_toStartOf="@+id/requestLabel"
+        app:layout_constraintTop_toBottomOf="@+id/idInput" />
+
+    <EditText
+        android:id="@+id/yrLvlInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/asap_medium"
+        android:hint="Eg. Year 13"
+        android:textColor="?attr/colorOnBackground"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/yrLvlLabel"
+        app:layout_constraintStart_toStartOf="@+id/yrLvlLabel"
+        app:layout_constraintTop_toBottomOf="@+id/yrLvlLabel" />
+
+    <TextView
+        android:id="@+id/counselorLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:fontFamily="@font/asap_semibold"
+        android:text="Have you seen a counselor Before?"
+        android:textColor="?attr/colorOnBackground"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/yrLvlLabel"
+        app:layout_constraintStart_toStartOf="@+id/yrLvlLabel"
+        app:layout_constraintTop_toBottomOf="@+id/yrLvlInput" />
+
+    <TextView
+        android:id="@+id/counselorSubtext"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/asap_medium"
+        android:text="If yes, please enter who you talked to. Else, if this is your first time, leave this field empty"
+        android:textColor="?attr/colorOnBackground"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/counselorLabel"
+        app:layout_constraintStart_toStartOf="@+id/counselorLabel"
+        app:layout_constraintTop_toBottomOf="@+id/counselorLabel" />
+
+    <EditText
+        android:id="@+id/counselorInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/asap_medium"
+        android:textColor="?attr/colorOnBackground"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/counselorSubtext"
+        app:layout_constraintStart_toStartOf="@+id/counselorSubtext"
+        app:layout_constraintTop_toBottomOf="@+id/counselorSubtext" />
+
+    <TextView
+        android:id="@+id/briefLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:fontFamily="@font/asap_semibold"
+        android:text="Please enter a brief description about what you'd like to talk about"
+        android:textColor="?attr/colorOnBackground"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/counselorInput"
+        app:layout_constraintStart_toStartOf="@+id/counselorInput"
+        app:layout_constraintTop_toBottomOf="@+id/counselorInput" />
+
+    <EditText
+        android:id="@+id/briefInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/asap_medium"
+        android:hint="Enter brief description"
+        android:textColor="?attr/colorOnBackground"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/briefLabel"
+        app:layout_constraintStart_toStartOf="@+id/briefLabel"
+        app:layout_constraintTop_toBottomOf="@+id/briefLabel" />
+
+    <android.widget.Button
+        android:id="@+id/requestButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-3dp"
+        android:layout_marginBottom="-3dp"
+        android:background="@drawable/continue_btn"
+        android:paddingStart="70dp"
+        android:paddingEnd="70dp"
+        android:text="Request"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/glass"
+        app:layout_constraintEnd_toStartOf="@+id/glassRight"
+        app:layout_constraintStart_toStartOf="@+id/glassLeft"
+        app:layout_constraintTop_toBottomOf="@+id/briefInput" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

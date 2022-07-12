@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/nav_home">
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.studyApp.home"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/home2login"
+            app:destination="@id/login"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:launchSingleTop="false" />
+        <action
+            android:id="@+id/home2UserInfo"
+            app:destination="@id/userInfo" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_chat"
+        android:name="com.example.studyApp.chat"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" >
+        <action
+            android:id="@+id/chat2Login"
+            app:destination="@id/login" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_study"
+        android:name="com.example.studyApp.study"
+        android:label="fragment_study"
+        tools:layout="@layout/fragment_study" >
+        <action
+            android:id="@+id/study2Request"
+            app:destination="@id/send_request"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/study2Counselor"
+            app:destination="@id/counselor" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signUp"
+        android:name="com.example.studyApp.signUp"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up">
+        <action
+            android:id="@+id/signUp2Login"
+            app:destination="@id/login"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/signUp2UserInfo"
+            app:destination="@id/userInfo"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/login"
+        android:name="com.example.studyApp.login"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/login2SignUp"
+            app:destination="@id/signUp"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/login2ForgotPW"
+            app:destination="@id/forgot_pw"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/login2UserInfo"
+            app:destination="@id/userInfo"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/forgot_pw"
+        android:name="com.example.studyApp.forgot_pw"
+        android:label="fragment_forgot_pw"
+        tools:layout="@layout/fragment_forgot_pw" >
+        <action
+            android:id="@+id/forgotPW2Login"
+            app:destination="@id/login"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/userInfo"
+        android:name="com.example.studyApp.userInfo"
+        android:label="fragment_user_info"
+        tools:layout="@layout/fragment_user_info" />
+
+    <action
+        android:id="@+id/globalNavHome"
+        app:destination="@id/nav_home"
+        app:enterAnim="@android:anim/slide_in_left"
+        app:exitAnim="@android:anim/slide_out_right" />
+    <fragment
+        android:id="@+id/send_request"
+        android:name="com.example.studyApp.send_request"
+        android:label="fragment_send_request"
+        tools:layout="@layout/fragment_send_request" >
+        <action
+            android:id="@+id/action_send_request_to_nav_study"
+            app:destination="@id/nav_study"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/counselor"
+        android:name="com.example.studyApp.counselor"
+        android:label="fragment_counselor"
+        tools:layout="@layout/fragment_counselor" >
+        <action
+            android:id="@+id/action_counselor_to_nav_study"
+            app:destination="@id/nav_study" />
+    </fragment>
+</navigation>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:contentDescription="@string/content_description"
+    app:layout_constraintGuide_percent="0.65"
+    android:fitsSystemWindows="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/content_description"
+        app:layout_constraintGuide_percent="0.65">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:elevation="0dp"
+            android:minHeight="?attr/actionBarSize"
+            app:contentInsetEnd="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetStart="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@string/EmptyPlaceholder">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/toolBarConstraint"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout_editor_absoluteY="18dp">
+
+                <TextView
+                    android:id="@+id/header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/asap_semibold"
+                    android:text='@string/app_name'
+                    android:textColor="?attr/colorOnBackground"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+        <ImageView
+            android:id="@+id/alphaWave"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:adjustViewBounds="true"
+            android:alpha=".6"
+            android:contentDescription="@string/content_description"
+            app:layout_constraintBottom_toTopOf="@+id/alphaGuide"
+            app:layout_constraintDimensionRatio="h,14.4:7"
+            app:layout_constraintEnd_toEndOf="@+id/waveRightGuide"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/waveLeftGuide"
+            app:srcCompat="@drawable/ic_wavebg" />
+
+        <ImageView
+            android:id="@+id/foreWave"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/content_description"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="h,14.4:7"
+            app:layout_constraintEnd_toEndOf="@+id/waveRightGuide"
+            app:layout_constraintStart_toStartOf="@id/waveLeftGuide"
+            app:srcCompat="@drawable/bg_forewave" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/waveRightGuide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="72dp"
+            app:layout_constraintGuide_percent="1.04" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/waveLeftGuide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="-123dp"
+            app:layout_constraintGuide_percent="-0.03" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/alphaGuide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="0dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/blobGuide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="0dp"
+            app:layout_constraintGuide_percent=".25" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/blueBlobGuide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="133dp"
+            app:layout_constraintGuide_percent="0.4" />
+
+        <ImageView
+            android:id="@+id/purpleBlob"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/content_description"
+            app:layout_constraintDimensionRatio="h,1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/blobGuide"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_purple_blob" />
+
+        <ImageView
+            android:id="@+id/blueBlob"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:adjustViewBounds="true"
+            android:alpha="0.68"
+            android:contentDescription="@string/content_description"
+            app:layout_constraintBottom_toBottomOf="@+id/purpleBlob"
+            app:layout_constraintDimensionRatio="h,1:1"
+            app:layout_constraintEnd_toEndOf="@id/purpleBlob"
+            app:layout_constraintStart_toStartOf="@+id/blueBlobGuide"
+            app:srcCompat="@drawable/ic_trianglecut" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/circleGuide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="20dp"
+            app:layout_constraintGuide_percent="0.01" />
+
+        <View
+            android:id="@+id/bgCircle"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginBottom="-10dp"
+            android:alpha=".6"
+            android:background="@drawable/bg_circle"
+            app:layout_constraintBottom_toTopOf="@+id/alphaWave"
+            app:layout_constraintDimensionRatio="h,1:1"
+            app:layout_constraintEnd_toEndOf="@+id/circleGuide"
+            app:layout_constraintStart_toStartOf="@id/waveLeftGuide" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/navhost"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:defaultNavHost="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:navGraph="@navigation/navigation"/>
+
+        <TextView
+            android:id="@+id/hiddenTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/asap_semibold"
+            android:text='@string/app_name'
+            android:textColor="?attr/colorOnBackground"
+            android:textSize="16sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/hiddenBottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/hiddenBottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="?attr/actionBarSize" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/drawer"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="?attr/colorPrimaryVariant"
+        app:itemBackground="@color/item_selected"
+        app:itemIconTint="?attr/colorOnPrimary"
+        app:itemShapeInsetEnd="0dp"
+        app:itemShapeInsetStart="0dp"
+        app:itemTextAppearance="@style/menuText"
+        app:itemTextColor="?attr/colorOnPrimary"
+        app:itemVerticalPadding="17dp"
+        app:menu="@menu/menu" />
+</androidx.drawerlayout.widget.DrawerLayout>

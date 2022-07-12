@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="menuText">
+        <item name="fontFamily">@fonts/asap_medium</item>
+    </style>
+
+    <style name="GradientMeshOverlay">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">7.5%</item>
+    </style>
+
+    <style name="hwCentreOverlay">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">10dp</item>
+    </style>
+
+    <style name="requestWaveOverlay">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeBottomLeft">10dp</item>
+        <item name="cornerSizeBottomRight">10dp</item>
+    </style>
+</resources>
