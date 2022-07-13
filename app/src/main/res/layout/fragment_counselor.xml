@@ -42,7 +42,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:fontFamily="@font/quicksand_semibold"
-        android:text="Request an Academic Mentor"
+        android:text="Request a Counsellor"
         android:textColor="?attr/colorOnBackground"
         android:textSize="22sp"
         app:layout_constraintEnd_toStartOf="@+id/glassRight"
