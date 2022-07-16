@@ -100,7 +100,7 @@ public class counselor extends Fragment {
                                     "\nStudent ID " + idInput.getText().toString().trim() +
                                     "\nYear Level: " + yrLvlInput.getText().toString().trim() +
                                     "\nBrief Description: " + briefInput.getText().toString().trim()
-                                    +"\n\n I have made an appointment before. Last time I talked to" + counselorInput.getText().toString().trim()
+                                    +"\n\n I have made an appointment before. Last time I talked to was: " + counselorInput.getText().toString().trim()
                                     +".\n\n Thank you"
                                     +"\n StudyApp Team" //TODO change name to real
                     );

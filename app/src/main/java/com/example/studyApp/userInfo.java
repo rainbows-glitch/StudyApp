@@ -151,6 +151,7 @@ public class userInfo extends Fragment {
 
         return view;
     }
+
      public Map<String, String> createClasses(EditText subjectInput, EditText roomInput, EditText teacherInput){
         Map<String, String> returnedMap = new HashMap<>();
          returnedMap.put("subject", subjectInput.getText().toString().trim());
@@ -214,6 +215,7 @@ public class userInfo extends Fragment {
 
              stringArrayAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, classNames);
              subjectInput.setOnItemClickListener((adapterView, view1, i1, l) -> {
+//             subject input will be the classInformation key that will be replaced with correct value
                Map<String, String> data = classInformation.get(subjectInput.getText().toString());
                subjectInput.setText(data.get("subject"));
                roomInput.setText(data.get("room"));

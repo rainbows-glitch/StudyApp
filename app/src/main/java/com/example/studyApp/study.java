@@ -34,11 +34,12 @@ public class study extends Fragment {
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()){
                         HashMap<String, Object> data = (HashMap<String, Object>) documentSnapshot.getData();
-                        Log.d("data", String.valueOf(data));
+
                         RecyclerView rv = view.findViewById(R.id.studyRV);
                         rv.setAdapter(new homeworkCentreAdapter(requireContext(), data));
                         LinearLayoutManager parentLayout = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
                         rv.setLayoutManager(parentLayout);
+
                     }else{ //error handling
                         Toast.makeText(requireContext(), "Something went wrong. Please try again later.", Toast.LENGTH_LONG).show();}
                 }).addOnFailureListener(e -> {
