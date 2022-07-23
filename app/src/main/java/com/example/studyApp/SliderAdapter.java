@@ -42,7 +42,7 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
     public void onBindViewHolder(@NonNull SliderViewHolder holder, int position) {
 
         holder.classesRV.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
-        holder.classesRV.setAdapter(new ClassesAdapter(mContext, mClasses, mTimetable, position%5+1));
+        holder.classesRV.setAdapter(new ClassesAdapter(mContext, mClasses, mTimetable, position));
     }
 
     @Override
@@ -64,14 +64,14 @@ class ClassesAdapter extends RecyclerView.Adapter<ClassesAdapter.ClassesViewHold
     Context mContext;
     Map<String,Object> mClasses;
     Map<String,Object> mTimetable;
-    int mParentPos;
+    private final int mParentPos;
     Map<Integer, String[]> times = new HashMap<>();
 
     ClassesAdapter(Context context, Map<String, Object> classes, Map<String,Object> timetable, int parentPos){
         mContext = context;
         mClasses = classes;
         mTimetable = timetable;
-        mParentPos = parentPos;
+        mParentPos = parentPos%5+1;
 
         times.put(1, new String[]{"9:00am - 9:55am", "9:55am - 10:50am", "11:40am - 12:35pm", "12:35pm - 1:30pm", "2:10pm - 3:05pm"});
         times.put(2, new String[]{"9:00am - 9:55am", "9:55am - 10:50am", "11:40am - 12:35pm", "12:35pm - 1:30pm", "2:10pm - 3:05pm"});
