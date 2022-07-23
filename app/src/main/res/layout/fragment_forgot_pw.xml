@@ -5,7 +5,7 @@
     android:id="@+id/forgotPWLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".forgot_pw">
+    tools:context=".ForgotPw">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/glassLeft"

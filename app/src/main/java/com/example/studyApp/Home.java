@@ -28,7 +28,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class home extends Fragment {
+public class Home extends Fragment {
 
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseUser user = auth.getCurrentUser();
@@ -41,7 +41,7 @@ public class home extends Fragment {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
-//        show navigation since we know users might enter home from login/signup
+//        show navigation since we know users might enter Home from Login/signup
         ((MainActivity)requireActivity()).showNavigation();
 
 //        check if user is signed in
@@ -87,7 +87,7 @@ public class home extends Fragment {
                                         if (documentSnapshot1.exists()){
                                             Map<String, Object> timetable = documentSnapshot1.getData();
                                             Log.d("TIMETABLE", timetable.toString());
-                                            sliderAdapter parentAdapter = new sliderAdapter(getContext(), classes, timetable);
+                                            SliderAdapter parentAdapter = new SliderAdapter(getContext(), classes, timetable);
                                             RecyclerView rv = view.findViewById(R.id.horizontalRecycle);
                                             rv.setAdapter(parentAdapter);
 

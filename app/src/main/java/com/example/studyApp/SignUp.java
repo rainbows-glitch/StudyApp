@@ -37,7 +37,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.regex.Pattern;
 
-public class signUp extends Fragment {
+public class SignUp extends Fragment {
 //    declare
     private View glass;
     private ConstraintLayout loginLayout;
@@ -110,7 +110,7 @@ public class signUp extends Fragment {
             mConstraintSet.applyTo(loginLayout);
         })));
 
-//        switch to login fragment
+//        switch to Login fragment
         register1.setOnClickListener(view1 -> NavHostFragment.findNavController(this).navigate(R.id.signUp2Login));
         register2.setOnClickListener(view1 -> NavHostFragment.findNavController(this).navigate(R.id.signUp2Login));
 
@@ -218,10 +218,10 @@ public class signUp extends Fragment {
                                                 NavHostFragment.findNavController(this).navigate(R.id.signUp2UserInfo);
                                             }
                                         });
-                                Log.d("login", "Logged In");
+                                Log.d("Login", "Logged In");
                             } else {
                                 Toast.makeText(getContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                                Log.d("login", task.getException().getMessage());
+                                Log.d("Login", task.getException().getMessage());
                             }
                         });
             } catch (ApiException err) {
@@ -246,12 +246,12 @@ public class signUp extends Fragment {
                     emailProvided = true;
                 } catch (NumberFormatException err) {
                     Toast.makeText(getContext(), "Invalid Email Field. Please try again", Toast.LENGTH_LONG).show();
-                    Log.d("signUp", "Email input not valid");
+                    Log.d("SignUp", "Email input not valid");
                     return;
                 }
             } else {
                 Toast.makeText(getContext(), "Invalid Email Field. Please try again", Toast.LENGTH_LONG).show();
-                Log.d("signUp", "Invalid Email Input");
+                Log.d("SignUp", "Invalid Email Input");
                 return;
             }
         }else{

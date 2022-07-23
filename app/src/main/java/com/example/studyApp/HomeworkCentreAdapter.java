@@ -18,26 +18,26 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class homeworkCentreAdapter extends RecyclerView.Adapter<homeworkCentreAdapter.homeworkViewHolder>{
+public class HomeworkCentreAdapter extends RecyclerView.Adapter<HomeworkCentreAdapter.HomeworkViewHolder>{
     Context mContext;
     HashMap<String, Object> hwData;
 
-    homeworkCentreAdapter(Context context, HashMap<String, Object> data){
+    HomeworkCentreAdapter(Context context, HashMap<String, Object> data){
         mContext = context;
         hwData = data;
     }
 
     @NonNull
     @Override
-    public homeworkViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public HomeworkViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
 
         View card = inflater.inflate(R.layout.homework_centre_view, parent, false);
-        return new homeworkViewHolder(card);
+        return new HomeworkViewHolder(card);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull homeworkViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull HomeworkViewHolder holder, int position) {
         Object[] keySet = hwData.keySet().toArray();
         Map<String, String> currentData = (Map<String, String>) hwData.get(keySet[position]);
         AtomicBoolean status = new AtomicBoolean(false);
@@ -75,12 +75,12 @@ public class homeworkCentreAdapter extends RecyclerView.Adapter<homeworkCentreAd
         return hwData.size();
     }
 
-    static class  homeworkViewHolder extends RecyclerView.ViewHolder{
+    static class HomeworkViewHolder extends RecyclerView.ViewHolder{
         ConstraintLayout mLayout, expandedLayout;
         TextView label, description, time, location;
         ShapeableImageView card;
         ImageView arrow;
-        public homeworkViewHolder(@NonNull View itemView) {
+        public HomeworkViewHolder(@NonNull View itemView) {
             super(itemView);
             mLayout = itemView.findViewById(R.id.hwLayout);
             label = itemView.findViewById(R.id.cardLabel);

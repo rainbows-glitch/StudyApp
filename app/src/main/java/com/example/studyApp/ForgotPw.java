@@ -22,7 +22,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class forgot_pw extends Fragment {
+public class ForgotPw extends Fragment {
 
     private View glass;
     private ConstraintLayout forgotPWLayout;

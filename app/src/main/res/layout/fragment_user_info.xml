@@ -5,7 +5,7 @@
     android:id="@+id/infoLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".login">
+    tools:context=".Login">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/glassLeft"

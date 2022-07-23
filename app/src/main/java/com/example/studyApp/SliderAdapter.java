@@ -18,12 +18,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class sliderAdapter extends RecyclerView.Adapter<sliderAdapter.sliderViewHolder>{ //parent adapter
+public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderViewHolder>{ //parent adapter
     Context mContext;
     Map<String,Object> mClasses;
     Map<String,Object> mTimetable;
 
-    sliderAdapter(Context context, Map<String, Object> classes, Map<String,Object> timetable){
+    SliderAdapter(Context context, Map<String, Object> classes, Map<String,Object> timetable){
         mContext = context;
         mClasses = classes;
         mTimetable = timetable;
@@ -31,18 +31,18 @@ public class sliderAdapter extends RecyclerView.Adapter<sliderAdapter.sliderView
 
     @NonNull
     @Override
-    public sliderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public SliderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
 
         View columnView = inflater.inflate(R.layout.slider_view, parent, false);
-        return new sliderViewHolder(columnView);
+        return new SliderViewHolder(columnView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull sliderViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SliderViewHolder holder, int position) {
 
         holder.classesRV.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
-        holder.classesRV.setAdapter(new classesAdapter(mContext, mClasses, mTimetable, position%5+1));
+        holder.classesRV.setAdapter(new ClassesAdapter(mContext, mClasses, mTimetable, position%5+1));
     }
 
     @Override
@@ -50,24 +50,24 @@ public class sliderAdapter extends RecyclerView.Adapter<sliderAdapter.sliderView
         return 25;
     } //5 weeks
 
-    public static class sliderViewHolder extends RecyclerView.ViewHolder{
+    public static class SliderViewHolder extends RecyclerView.ViewHolder{
         public RecyclerView classesRV;
 
-        public sliderViewHolder(@NonNull View itemView) {
+        public SliderViewHolder(@NonNull View itemView) {
             super(itemView);
             classesRV = itemView.findViewById(R.id.classesRV);
         }
     }
 }
 
-class classesAdapter extends RecyclerView.Adapter<classesAdapter.classesViewHolder>{ //child adapter
+class ClassesAdapter extends RecyclerView.Adapter<ClassesAdapter.ClassesViewHolder>{ //child adapter
     Context mContext;
     Map<String,Object> mClasses;
     Map<String,Object> mTimetable;
     int mParentPos;
     Map<Integer, String[]> times = new HashMap<>();
 
-    classesAdapter(Context context, Map<String, Object> classes, Map<String,Object> timetable, int parentPos){
+    ClassesAdapter(Context context, Map<String, Object> classes, Map<String,Object> timetable, int parentPos){
         mContext = context;
         mClasses = classes;
         mTimetable = timetable;
@@ -82,15 +82,15 @@ class classesAdapter extends RecyclerView.Adapter<classesAdapter.classesViewHold
 
     @NonNull
     @Override
-    public classesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ClassesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
 
         View classesView = inflater.inflate(R.layout.classes_view, parent, false);
-        return new classesViewHolder(classesView);
+        return new ClassesViewHolder(classesView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull classesViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ClassesViewHolder holder, int position) {
         holder.tab.post(() -> holder.subject.post(() -> holder.room.post(() -> {
             ViewGroup.MarginLayoutParams timeLayoutParams = (ViewGroup.MarginLayoutParams) holder.time.getLayoutParams();
             int timeMargin = timeLayoutParams.leftMargin;
@@ -119,12 +119,12 @@ class classesAdapter extends RecyclerView.Adapter<classesAdapter.classesViewHold
         return 5;
     }
 
-    public static class classesViewHolder extends RecyclerView.ViewHolder{
+    public static class ClassesViewHolder extends RecyclerView.ViewHolder{
         public ConstraintLayout cardLayout;
         public ImageView tab;
         public TextView subject, teacher, room, time;
 
-        public classesViewHolder(@NonNull View itemView) {
+        public ClassesViewHolder(@NonNull View itemView) {
             super(itemView);
             cardLayout = itemView.findViewById(R.id.cardLayout);
             tab = itemView.findViewById(R.id.tab);

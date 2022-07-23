@@ -35,7 +35,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class login extends Fragment {
+public class Login extends Fragment {
 //    declare
     private View glass;
     private ConstraintLayout loginLayout;
@@ -120,7 +120,7 @@ public class login extends Fragment {
             mConstraintSet.applyTo(loginLayout);
         })));
 
-//        switch to signUp fragment
+//        switch to SignUp fragment
         register1.setOnClickListener(view1 -> NavHostFragment.findNavController(this).navigate(R.id.login2SignUp));
         register2.setOnClickListener(view1 -> NavHostFragment.findNavController(this).navigate(R.id.login2SignUp));
 
@@ -231,10 +231,10 @@ public class login extends Fragment {
                                         NavHostFragment.findNavController(this).navigate(R.id.login2UserInfo);
                                     }
                                 });
-                                Log.d("login", "Logged In");
+                                Log.d("Login", "Logged In");
                             } else {
                                 Toast.makeText(getContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                                Log.d("login", task.getException().getMessage());
+                                Log.d("Login", task.getException().getMessage());
                             }
                         });
             } catch (ApiException err) {

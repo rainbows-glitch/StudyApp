@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class userInfo extends Fragment {
+public class UserInfo extends Fragment {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

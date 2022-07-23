@@ -6,7 +6,7 @@
     app:startDestination="@id/nav_home">
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.studyApp.home"
+        android:name="com.example.studyApp.Home"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_chat"
-        android:name="com.example.studyApp.chat"
+        android:name="com.example.studyApp.Chat"
         android:label="fragment_chat"
         tools:layout="@layout/fragment_chat" >
         <action
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_study"
-        android:name="com.example.studyApp.study"
+        android:name="com.example.studyApp.Study"
         android:label="fragment_study"
         tools:layout="@layout/fragment_study" >
         <action
@@ -45,7 +45,7 @@
 
     <fragment
         android:id="@+id/signUp"
-        android:name="com.example.studyApp.signUp"
+        android:name="com.example.studyApp.SignUp"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up">
         <action
@@ -61,7 +61,7 @@
     </fragment>
     <fragment
         android:id="@+id/login"
-        android:name="com.example.studyApp.login"
+        android:name="com.example.studyApp.Login"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login">
         <action
@@ -82,7 +82,7 @@
     </fragment>
     <fragment
         android:id="@+id/forgot_pw"
-        android:name="com.example.studyApp.forgot_pw"
+        android:name="com.example.studyApp.ForgotPw"
         android:label="fragment_forgot_pw"
         tools:layout="@layout/fragment_forgot_pw" >
         <action
@@ -93,7 +93,7 @@
     </fragment>
     <fragment
         android:id="@+id/userInfo"
-        android:name="com.example.studyApp.userInfo"
+        android:name="com.example.studyApp.UserInfo"
         android:label="fragment_user_info"
         tools:layout="@layout/fragment_user_info" />
 
@@ -104,7 +104,7 @@
         app:exitAnim="@android:anim/slide_out_right" />
     <fragment
         android:id="@+id/send_request"
-        android:name="com.example.studyApp.send_request"
+        android:name="com.example.studyApp.SendRequest"
         android:label="fragment_send_request"
         tools:layout="@layout/fragment_send_request" >
         <action
@@ -115,7 +115,7 @@
     </fragment>
     <fragment
         android:id="@+id/counselor"
-        android:name="com.example.studyApp.counselor"
+        android:name="com.example.studyApp.Counselor"
         android:label="fragment_counselor"
         tools:layout="@layout/fragment_counselor" >
         <action

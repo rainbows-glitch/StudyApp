@@ -17,7 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 
-public class study extends Fragment {
+public class Study extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_study, container, false);
@@ -36,7 +36,7 @@ public class study extends Fragment {
                         HashMap<String, Object> data = (HashMap<String, Object>) documentSnapshot.getData();
 
                         RecyclerView rv = view.findViewById(R.id.studyRV);
-                        rv.setAdapter(new homeworkCentreAdapter(requireContext(), data));
+                        rv.setAdapter(new HomeworkCentreAdapter(requireContext(), data));
                         LinearLayoutManager parentLayout = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
                         rv.setLayoutManager(parentLayout);
 
